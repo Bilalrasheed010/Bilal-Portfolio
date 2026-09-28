@@ -1,0 +1,34 @@
+/* ============================================================
+   BrandMark
+   File: src/components/BrandMark.css
+   ------------------------------------------------------------
+   The mark inherits `currentColor` by default. When its parent
+   anchor or button is hovered or focused, only the M half
+   transitions to the accent violet. One restrained motion.
+   ============================================================ */
+
+.brand-mark {
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: visible;
+  color: var(--ink, var(--text-primary));
+}
+
+.brand-mark__m,
+.brand-mark__b {
+  transition: stroke var(--dur-micro, 140ms) var(--ease-editorial);
+}
+
+a:hover > .brand-mark .brand-mark__m,
+a:focus-visible > .brand-mark .brand-mark__m,
+button:hover > .brand-mark .brand-mark__m,
+.brand-mark.is-interactive:hover .brand-mark__m {
+  stroke: var(--accent-signature);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mark__m,
+  .brand-mark__b {
+    transition: none;
+  }
+}

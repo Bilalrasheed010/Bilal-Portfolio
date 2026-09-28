@@ -1,0 +1,1303 @@
+/* ============================================================
+   MUHAMMAD BILAL — PORTFOLIO DESIGN SYSTEM
+   File: src/styles/theme.css
+   Version: 2.0.0
+   ------------------------------------------------------------
+   Single source of truth for every design decision in the
+   portfolio. Every component reads from these tokens.
+
+   STRUCTURE
+     PART 1  Base tokens
+     PART 2  Semantic aliases
+     PART 3  Component tokens
+     PART 4  Responsive overrides
+     PART 5  Accessibility layers
+     PART 6  Editorial system
+     PART 7  Hero size correction
+   ============================================================ */
+
+/* ============================================================
+   PART 1 — BASE TOKENS
+   ============================================================ */
+:root {
+
+/* ---------- 01. COLOR — NEUTRAL SCALE ---------- */
+  --neutral-0:              #FFFFFF;
+  --neutral-25:             #F7F7F9;
+  --neutral-50:             #EFEFF2;
+  --neutral-100:            #E1E1E7;
+  --neutral-200:            #C7C7D0;
+  --neutral-300:            #A1A1AC;
+  --neutral-400:            #7C7C89;
+  --neutral-500:            #5C5C68;
+  --neutral-600:            #42424C;
+  --neutral-700:            #2B2B34;
+  --neutral-800:            #1A1A21;
+  --neutral-850:            #121218;
+  --neutral-900:            #0B0B11;
+  --neutral-950:            #07070B;
+  --neutral-1000:           #04040A;
+
+/* ---------- 02. COLOR — ACCENT (violet) ---------- */
+  --accent-50:              #F3EEFF;
+  --accent-100:             #E5DBFF;
+  --accent-200:             #CDB8FF;
+  --accent-300:             #B393FF;
+  --accent-400:             #A07BFF;
+  --accent-500:             #8B5CF6;
+  --accent-600:             #7A46F0;
+  --accent-700:             #6D46C7;
+  --accent-800:             #4F2E96;
+  --accent-900:             #2E1A5E;
+
+/* ---------- 03. COLOR — SECONDARY ACCENT (cyan) ---------- */
+  --accent2-100:            #CFFAFE;
+  --accent2-200:            #A5F3FC;
+  --accent2-300:            #67E8F9;
+  --accent2-400:            #22D3EE;
+  --accent2-500:            #06B6D4;
+  --accent2-600:            #0891B2;
+  --accent2-700:            #0E7490;
+  --accent2-800:            #155E75;
+  --accent2-900:            #164E63;
+
+/* ---------- 04. COLOR — TERTIARY ACCENT (pink) ---------- */
+  --accent3-300:            #F9A8D4;
+  --accent3-400:            #F472B6;
+  --accent3-500:            #EC4899;
+  --accent3-600:            #DB2777;
+
+/* ---------- 05. COLOR — STATUS ---------- */
+  --success-100:            #D1FAE5;
+  --success-300:            #6EE7B7;
+  --success-400:            #34D399;
+  --success-500:            #10B981;
+  --success-600:            #059669;
+  --success-700:            #047857;
+  --warning-100:            #FEF3C7;
+  --warning-300:            #FCD34D;
+  --warning-400:            #FBBF24;
+  --warning-500:            #F59E0B;
+  --warning-600:            #D97706;
+  --error-100:              #FEE2E2;
+  --error-300:              #FCA5A5;
+  --error-400:              #F87171;
+  --error-500:              #EF4444;
+  --error-600:              #DC2626;
+  --info-300:               #93C5FD;
+  --info-400:               #60A5FA;
+  --info-500:               #3B82F6;
+
+/* ---------- 06. COLOR — BACKGROUND LAYERS ---------- */
+  --bg-canvas:              var(--neutral-950);
+  --bg-canvas-alt:          var(--neutral-900);
+  --bg-elevated:            var(--neutral-850);
+  --bg-raised:              var(--neutral-800);
+  --bg-deep:                var(--neutral-1000);
+  --bg-hero:                #06060C;
+  --bg-inverse:             var(--neutral-50);
+
+/* ---------- 07. COLOR — SURFACES ---------- */
+  --surface-1:              rgba(255, 255, 255, 0.025);
+  --surface-2:              rgba(255, 255, 255, 0.04);
+  --surface-3:              rgba(255, 255, 255, 0.06);
+  --surface-4:              rgba(255, 255, 255, 0.08);
+  --surface-5:              rgba(255, 255, 255, 0.10);
+  --surface-inverse:        rgba(0, 0, 0, 0.04);
+  --surface-inverse-strong: rgba(0, 0, 0, 0.08);
+
+/* ---------- 08. COLOR — BORDERS ---------- */
+  --border-faint:           rgba(255, 255, 255, 0.04);
+  --border-subtle:          rgba(255, 255, 255, 0.07);
+  --border-default:         rgba(255, 255, 255, 0.10);
+  --border-strong:          rgba(255, 255, 255, 0.16);
+  --border-heavy:           rgba(255, 255, 255, 0.24);
+  --border-inverse:         rgba(0, 0, 0, 0.10);
+  --border-accent:          rgba(139, 92, 246, 0.35);
+  --border-accent-strong:   rgba(139, 92, 246, 0.55);
+  --border-accent2:         rgba(34, 211, 238, 0.30);
+  --border-success:         rgba(52, 211, 153, 0.40);
+  --border-warning:         rgba(251, 191, 36, 0.40);
+  --border-error:           rgba(248, 113, 113, 0.40);
+
+/* ---------- 09. COLOR — TEXT ---------- */
+  --text-primary:           #F4F4F6;
+  --text-secondary:         #B4B4BF;
+  --text-tertiary:          #8A8A96;
+  --text-muted:             #6A6A76;
+  --text-faint:             #4A4A56;
+  --text-ghost:             #2E2E38;
+  --text-inverse:           #0B0B11;
+  --text-inverse-muted:     #4A4A56;
+  --text-accent:            var(--accent-400);
+  --text-accent2:           var(--accent2-400);
+  --text-success:           var(--success-400);
+  --text-warning:           var(--warning-400);
+  --text-error:             var(--error-400);
+
+/* ---------- 10. COLOR — OPACITY ALIASES ---------- */
+  --alpha-0:                rgba(255, 255, 255, 0.00);
+  --alpha-2:                rgba(255, 255, 255, 0.02);
+  --alpha-4:                rgba(255, 255, 255, 0.04);
+  --alpha-6:                rgba(255, 255, 255, 0.06);
+  --alpha-8:                rgba(255, 255, 255, 0.08);
+  --alpha-12:               rgba(255, 255, 255, 0.12);
+  --alpha-16:               rgba(255, 255, 255, 0.16);
+  --alpha-24:               rgba(255, 255, 255, 0.24);
+  --alpha-40:               rgba(255, 255, 255, 0.40);
+  --alpha-60:               rgba(255, 255, 255, 0.60);
+  --alpha-80:               rgba(255, 255, 255, 0.80);
+
+/* ---------- 11. COLOR — SELECTION ---------- */
+  --selection-bg:           rgba(139, 92, 246, 0.30);
+  --selection-text:         var(--text-primary);
+  --caret-color:            var(--accent-400);
+
+/* ---------- 12. GLASS SYSTEM ---------- */
+  --glass-light-bg:         rgba(20, 20, 28, 0.35);
+  --glass-light-border:     rgba(255, 255, 255, 0.06);
+  --glass-light-blur:       10px;
+  --glass-bg:               rgba(15, 15, 22, 0.55);
+  --glass-bg-hover:         rgba(20, 20, 30, 0.70);
+  --glass-bg-active:        rgba(25, 25, 35, 0.80);
+  --glass-border:           rgba(255, 255, 255, 0.08);
+  --glass-border-hover:     rgba(255, 255, 255, 0.16);
+  --glass-border-accent:    rgba(139, 92, 246, 0.30);
+  --glass-blur:             16px;
+  --glass-saturate:         140%;
+  --glass-strong-bg:        rgba(10, 10, 16, 0.75);
+  --glass-strong-border:    rgba(255, 255, 255, 0.10);
+  --glass-strong-blur:      24px;
+  --glass-highlight-top:    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --glass-highlight-inner:  inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --glass-shadow:           0 8px 32px rgba(0, 0, 0, 0.40);
+  --glass-shadow-hover:     0 12px 48px rgba(0, 0, 0, 0.55);
+
+/* ---------- 13. GRADIENTS ---------- */
+  --gradient-accent:        linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+  --gradient-accent-rev:    linear-gradient(135deg, #22D3EE 0%, #8B5CF6 100%);
+  --gradient-accent-soft:   linear-gradient(135deg, rgba(139,92,246,0.20) 0%, rgba(34,211,238,0.10) 100%);
+  --gradient-accent-faint:  linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(34,211,238,0.05) 100%);
+  --gradient-text:          linear-gradient(135deg, #F4F4F6 0%, #A1A1AC 100%);
+  --gradient-text-accent:   linear-gradient(135deg, #A07BFF 0%, #22D3EE 100%);
+  --gradient-text-muted:    linear-gradient(135deg, #A1A1AC 0%, #6A6A76 100%);
+  --gradient-border:        linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 50%, rgba(139,92,246,0.15) 100%);
+  --gradient-border-accent: linear-gradient(135deg, rgba(139,92,246,0.50) 0%, rgba(34,211,238,0.30) 100%);
+  --gradient-hero:          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,92,246,0.14) 0%, transparent 60%);
+  --gradient-hero-bottom:   radial-gradient(ellipse 70% 50% at 50% 100%, rgba(34,211,238,0.08) 0%, transparent 60%);
+  --gradient-section:       radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,92,246,0.05) 0%, transparent 70%);
+  --gradient-spotlight:     radial-gradient(circle 400px at var(--mx, 50%) var(--my, 50%), rgba(139,92,246,0.10) 0%, transparent 70%);
+  --gradient-fade-top:      linear-gradient(180deg, rgba(7,7,11,0.9) 0%, rgba(7,7,11,0) 100%);
+  --gradient-fade-bottom:   linear-gradient(180deg, rgba(7,7,11,0) 0%, rgba(7,7,11,0.9) 100%);
+  --gradient-fade-left:     linear-gradient(90deg, rgba(7,7,11,0.9) 0%, rgba(7,7,11,0) 100%);
+  --gradient-fade-right:    linear-gradient(90deg, rgba(7,7,11,0) 0%, rgba(7,7,11,0.9) 100%);
+  --gradient-shimmer:       linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+
+/* ---------- 14. NOISE ---------- */
+  --noise-opacity:          0.025;
+  --noise-blend-mode:       overlay;
+  --noise-size:             200px;
+
+/* ---------- 15. SHADOWS ---------- */
+  --shadow-2xs:             0 1px 2px rgba(0, 0, 0, 0.20);
+  --shadow-xs:              0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-sm:              0 2px 8px rgba(0, 0, 0, 0.28);
+  --shadow-md:              0 6px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg:              0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-xl:              0 24px 64px rgba(0, 0, 0, 0.55);
+  --shadow-2xl:             0 40px 96px rgba(0, 0, 0, 0.65);
+  --shadow-inset-top:       inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-inset-bottom:    inset 0 -1px 0 rgba(0, 0, 0, 0.30);
+  --shadow-inset-full:      inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+/* ---------- 16. GLOW ---------- */
+  --glow-accent-2xs:        0 0 12px rgba(139, 92, 246, 0.10);
+  --glow-accent-xs:         0 0 20px rgba(139, 92, 246, 0.15);
+  --glow-accent-sm:         0 0 32px rgba(139, 92, 246, 0.22);
+  --glow-accent-md:         0 0 48px rgba(139, 92, 246, 0.32);
+  --glow-accent-lg:         0 0 80px rgba(139, 92, 246, 0.45);
+  --glow-accent2-xs:        0 0 20px rgba(34, 211, 238, 0.15);
+  --glow-accent2-sm:        0 0 32px rgba(34, 211, 238, 0.22);
+  --glow-success:           0 0 20px rgba(52, 211, 153, 0.30);
+  --glow-warning:           0 0 20px rgba(251, 191, 36, 0.30);
+  --glow-error:             0 0 20px rgba(248, 113, 113, 0.30);
+  --glow-text-accent:       0 0 24px rgba(139, 92, 246, 0.40);
+  --glow-text-accent2:      0 0 24px rgba(34, 211, 238, 0.40);
+
+/* ---------- 17. BLUR ---------- */
+  --blur-none:              0px;
+  --blur-2xs:               1px;
+  --blur-xs:                2px;
+  --blur-sm:                4px;
+  --blur-md:                8px;
+  --blur-lg:                16px;
+  --blur-xl:                24px;
+  --blur-2xl:               40px;
+  --blur-3xl:               64px;
+
+/* ---------- 18. OPACITY ---------- */
+  --opacity-disabled:       0.40;
+  --opacity-muted:          0.60;
+  --opacity-subtle:         0.75;
+  --opacity-default:        1.00;
+  --opacity-ghost:          0.15;
+
+/* ---------- 19. RADII ---------- */
+  --radius-none:            0px;
+  --radius-2xs:             2px;
+  --radius-xs:              4px;
+  --radius-sm:              6px;
+  --radius-md:              10px;
+  --radius-lg:              14px;
+  --radius-xl:              20px;
+  --radius-2xl:             28px;
+  --radius-3xl:             40px;
+  --radius-pill:            999px;
+  --radius-circle:          50%;
+
+/* ---------- 20. BORDER WIDTHS ---------- */
+  --border-w-hairline:      0.5px;
+  --border-w-thin:          1px;
+  --border-w-medium:        1.5px;
+  --border-w-thick:         2px;
+  --border-w-heavy:         3px;
+
+/* ---------- 21. CONTAINER WIDTHS ---------- */
+  --container-xs:           560px;
+  --container-sm:           720px;
+  --container-md:           960px;
+  --container-lg:           1120px;
+  --container-xl:           1280px;
+  --container-2xl:          1440px;
+  --container-3xl:          1600px;
+  --container-default:      1280px;
+  --container-content:      800px;
+  --container-narrow:       640px;
+
+/* ---------- 22. GRID ---------- */
+  --grid-columns:           12;
+  --grid-gutter-sm:         16px;
+  --grid-gutter-md:         24px;
+  --grid-gutter-lg:         32px;
+  --grid-gutter-xl:         48px;
+
+/* ---------- 23. SPACING SCALE ---------- */
+  --space-0:                0;
+  --space-px:               1px;
+  --space-0-5:              0.125rem;
+  --space-1:                0.25rem;
+  --space-1-5:              0.375rem;
+  --space-2:                0.5rem;
+  --space-2-5:              0.625rem;
+  --space-3:                0.75rem;
+  --space-3-5:              0.875rem;
+  --space-4:                1rem;
+  --space-5:                1.25rem;
+  --space-6:                1.5rem;
+  --space-7:                1.75rem;
+  --space-8:                2rem;
+  --space-9:                2.25rem;
+  --space-10:               2.5rem;
+  --space-11:               2.75rem;
+  --space-12:               3rem;
+  --space-14:               3.5rem;
+  --space-16:               4rem;
+  --space-18:               4.5rem;
+  --space-20:               5rem;
+  --space-24:               6rem;
+  --space-28:               7rem;
+  --space-32:               8rem;
+  --space-36:               9rem;
+  --space-40:               10rem;
+  --space-48:               12rem;
+  --space-56:               14rem;
+  --space-64:               16rem;
+
+/* ------------------------------------------------------------
+   24. SEMANTIC SPACING
+   ------------------------------------------------------------
+   These are the tokens that control the vertical rhythm
+   between sections. Each value is per-side; two adjacent
+   sections contribute 2× the value as their combined gap.
+
+   New values chosen so the gap between any two sections
+   lands in the 64–100px range across all breakpoints.
+   ------------------------------------------------------------ */
+  --space-section-y:        clamp(2rem, 3.5vw, 3.125rem);
+  --space-section-y-tight:  clamp(1.5rem, 2.5vw, 2.25rem);
+  --space-section-gap:      clamp(1.5rem, 3vw, 2.5rem);
+  --space-block:            clamp(1.5rem, 3vw, 3rem);
+  --space-inline:           clamp(1rem, 4vw, 2rem);
+  --space-stack-sm:         clamp(0.5rem, 1vw, 0.75rem);
+  --space-stack-md:         clamp(1rem, 2vw, 1.5rem);
+  --space-stack-lg:         clamp(1.5rem, 3vw, 2.5rem);
+  --space-stack-xl:         clamp(2rem, 4vw, 3.5rem);
+
+/* ---------- 25. FONT FAMILIES ---------- */
+  --font-sans:              "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display:           "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-body:              var(--font-sans);
+  --font-mono:              "JetBrains Mono", "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", "Monaco", "Courier New", monospace;
+  --font-serif:             "Georgia", "Times New Roman", serif;
+
+/* ---------- 26. FLUID TYPE SCALE ---------- */
+  --fs-hero:                clamp(3rem, 9vw + 1rem, 7.5rem);
+  --fs-mega:                clamp(2.5rem, 7vw + 1rem, 6rem);
+  --fs-display:             clamp(2.25rem, 5.5vw + 0.75rem, 4.5rem);
+  --fs-h1:                  clamp(2rem, 4vw + 0.75rem, 3.5rem);
+  --fs-h2:                  clamp(1.625rem, 2.5vw + 0.5rem, 2.5rem);
+  --fs-h3:                  clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem);
+  --fs-h4:                  clamp(1.125rem, 1vw + 0.5rem, 1.375rem);
+  --fs-h5:                  clamp(1rem, 0.5vw + 0.75rem, 1.125rem);
+  --fs-h6:                  0.9375rem;
+  --fs-body-lg:             clamp(1.0625rem, 0.5vw + 0.875rem, 1.25rem);
+  --fs-body:                1rem;
+  --fs-body-sm:             0.9375rem;
+  --fs-body-xs:             0.875rem;
+  --fs-caption:             0.8125rem;
+  --fs-label:               0.75rem;
+  --fs-label-sm:            0.6875rem;
+  --fs-micro:               0.625rem;
+  --fs-mono:                0.8125rem;
+  --fs-mono-sm:             0.75rem;
+  --fs-code:                0.875rem;
+  --fs-button:              0.9375rem;
+  --fs-button-sm:           0.8125rem;
+  --fs-button-lg:           1rem;
+  --fs-nav:                 0.875rem;
+  --fs-nav-mobile:          1.25rem;
+
+/* ---------- 27. LINE HEIGHTS ---------- */
+  --lh-none:                1;
+  --lh-tighter:             1.02;
+  --lh-tight:               1.1;
+  --lh-snug:                1.25;
+  --lh-normal:              1.5;
+  --lh-relaxed:             1.65;
+  --lh-loose:               1.8;
+  --lh-looser:              2.0;
+
+/* ---------- 28. LETTER SPACING ---------- */
+  --ls-tighter:             -0.04em;
+  --ls-tight:               -0.02em;
+  --ls-snug:                -0.01em;
+  --ls-normal:              0em;
+  --ls-wide:                0.02em;
+  --ls-wider:               0.05em;
+  --ls-widest:              0.10em;
+  --ls-ultra:               0.16em;
+  --ls-mega:                0.24em;
+
+/* ---------- 29. FONT WEIGHTS ---------- */
+  --fw-thin:                100;
+  --fw-extralight:          200;
+  --fw-light:               300;
+  --fw-regular:             400;
+  --fw-medium:              500;
+  --fw-semibold:            600;
+  --fw-bold:                700;
+  --fw-extrabold:           800;
+  --fw-black:               900;
+
+/* ---------- 30. TYPE PRESETS ---------- */
+  --type-hero:              var(--fw-semibold) var(--fs-hero) / var(--lh-tight) var(--font-display);
+  --type-display:           var(--fw-semibold) var(--fs-display) / var(--lh-tight) var(--font-display);
+  --type-h1:                var(--fw-semibold) var(--fs-h1) / var(--lh-snug) var(--font-display);
+  --type-h2:                var(--fw-semibold) var(--fs-h2) / var(--lh-snug) var(--font-display);
+  --type-h3:                var(--fw-medium) var(--fs-h3) / var(--lh-snug) var(--font-display);
+  --type-h4:                var(--fw-medium) var(--fs-h4) / var(--lh-snug) var(--font-display);
+  --type-body:              var(--fw-regular) var(--fs-body) / var(--lh-relaxed) var(--font-body);
+  --type-body-lg:           var(--fw-regular) var(--fs-body-lg) / var(--lh-relaxed) var(--font-body);
+  --type-caption:           var(--fw-regular) var(--fs-caption) / var(--lh-normal) var(--font-body);
+  --type-label:             var(--fw-medium) var(--fs-label) / var(--lh-normal) var(--font-body);
+  --type-eyebrow:           var(--fw-medium) var(--fs-label) / var(--lh-normal) var(--font-mono);
+  --type-mono:              var(--fw-regular) var(--fs-mono) / var(--lh-normal) var(--font-mono);
+  --type-code:              var(--fw-regular) var(--fs-code) / var(--lh-relaxed) var(--font-mono);
+
+/* ---------- 31. MOTION — DURATIONS ---------- */
+  --dur-instant:            80ms;
+  --dur-2xs:                120ms;
+  --dur-xs:                 160ms;
+  --dur-sm:                 200ms;
+  --dur-fast:               250ms;
+  --dur-base:               320ms;
+  --dur-md:                 400ms;
+  --dur-medium:             500ms;
+  --dur-slow:               650ms;
+  --dur-slower:             800ms;
+  --dur-slowest:            1000ms;
+  --dur-ambient:            20s;
+  --dur-ambient-slow:       40s;
+  --dur-ambient-ultra:      80s;
+
+/* ---------- 32. MOTION — EASING ---------- */
+  --ease-linear:            linear;
+  --ease-out:               cubic-bezier(0.16, 1, 0.30, 1);
+  --ease-out-soft:          cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quart:         cubic-bezier(0.25, 1, 0.50, 1);
+  --ease-out-expo:          cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in:                cubic-bezier(0.40, 0, 1, 1);
+  --ease-in-out:            cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-standard:          cubic-bezier(0.40, 0, 0.20, 1);
+  --ease-emphasized:        cubic-bezier(0.20, 0, 0, 1);
+  --ease-spring:            cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring-soft:       cubic-bezier(0.25, 1.15, 0.50, 1);
+
+/* ---------- 33. MOTION — TRANSITION PRESETS ---------- */
+  --transition-none:        none;
+  --transition-fast:        var(--dur-fast) var(--ease-out);
+  --transition-base:        var(--dur-base) var(--ease-out);
+  --transition-medium:      var(--dur-medium) var(--ease-out);
+  --transition-slow:        var(--dur-slow) var(--ease-out);
+  --transition-spring:      var(--dur-medium) var(--ease-spring);
+  --transition-ambient:     var(--dur-ambient) linear;
+  --transition-color:       color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+  --transition-opacity:     opacity var(--dur-base) var(--ease-out);
+  --transition-transform:   transform var(--dur-base) var(--ease-out);
+  --transition-shadow:      box-shadow var(--dur-base) var(--ease-out);
+  --transition-all-smooth:  all var(--dur-base) var(--ease-out);
+
+/* ---------- 34. MOTION — DISTANCES ---------- */
+  --motion-dist-xs:         4px;
+  --motion-dist-sm:         8px;
+  --motion-dist-md:         16px;
+  --motion-dist-lg:         24px;
+  --motion-dist-xl:         40px;
+  --motion-dist-2xl:        64px;
+  --motion-dist-3xl:        96px;
+
+/* ---------- 35. MOTION — SCALE ---------- */
+  --scale-press:            0.97;
+  --scale-hover-sm:         1.02;
+  --scale-hover-md:         1.04;
+  --scale-hover-lg:         1.06;
+  --scale-pop:              1.08;
+
+/* ---------- 36. Z-INDEX ---------- */
+  --z-base:                 0;
+  --z-raised:               1;
+  --z-dropdown:             10;
+  --z-elevated:             20;
+  --z-sticky:               100;
+  --z-banner:               150;
+  --z-navbar:               200;
+  --z-drawer:               300;
+  --z-overlay:              500;
+  --z-modal:                800;
+  --z-popover:              850;
+  --z-tooltip:              900;
+  --z-toast:                950;
+  --z-cursor:               9000;
+  --z-loader:               9500;
+  --z-max:                  9999;
+
+/* ---------- 37. FOCUS ---------- */
+  --focus-ring-color:       var(--accent-400);
+  --focus-ring-width:       2px;
+  --focus-ring-offset:      2px;
+  --focus-ring:             0 0 0 var(--focus-ring-offset) var(--bg-canvas), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring-color);
+  --focus-ring-soft:        0 0 0 3px rgba(139, 92, 246, 0.35);
+  --focus-ring-error:       0 0 0 3px rgba(248, 113, 113, 0.35);
+
+/* ---------- 38. CURSOR ---------- */
+  --cursor-size-dot:        6px;
+  --cursor-size-ring:       36px;
+  --cursor-size-ring-hover: 64px;
+  --cursor-border:          1px solid rgba(255, 255, 255, 0.55);
+  --cursor-bg:              rgba(255, 255, 255, 0.85);
+  --cursor-mix-blend:       difference;
+  --cursor-transition:      transform var(--dur-fast) var(--ease-out), width var(--dur-fast) var(--ease-out), height var(--dur-fast) var(--ease-out);
+
+/* ---------- 39. SCROLLBAR ---------- */
+  --scrollbar-width:        10px;
+  --scrollbar-track:        var(--bg-canvas);
+  --scrollbar-thumb:        rgba(255, 255, 255, 0.10);
+  --scrollbar-thumb-hover:  rgba(255, 255, 255, 0.18);
+  --scrollbar-radius:       999px;
+
+/* ---------- 40. DIVIDERS ---------- */
+  --divider-color:          var(--border-subtle);
+  --divider-color-strong:   var(--border-default);
+  --divider-thickness:      1px;
+
+/* ---------- 41. OVERLAYS ---------- */
+  --overlay-bg:             rgba(4, 4, 10, 0.72);
+  --overlay-bg-strong:      rgba(4, 4, 10, 0.88);
+  --overlay-bg-light:       rgba(4, 4, 10, 0.40);
+  --overlay-blur:           12px;
+
+/* ---------- 42. SKELETON ---------- */
+  --skeleton-bg:            rgba(255, 255, 255, 0.04);
+  --skeleton-highlight:     rgba(255, 255, 255, 0.08);
+  --skeleton-radius:        var(--radius-sm);
+
+/* ---------- 43. ASPECT RATIOS ---------- */
+  --aspect-square:          1 / 1;
+  --aspect-video:           16 / 9;
+  --aspect-photo:           4 / 3;
+  --aspect-portrait:        3 / 4;
+  --aspect-wide:            21 / 9;
+  --aspect-ultrawide:       32 / 9;
+
+/* ---------- 44. ICON SIZES ---------- */
+  --icon-2xs:               12px;
+  --icon-xs:                14px;
+  --icon-sm:                16px;
+  --icon-md:                20px;
+  --icon-lg:                24px;
+  --icon-xl:                32px;
+  --icon-2xl:               40px;
+  --icon-3xl:               56px;
+
+/* ---------- 45. AVATAR SIZES ---------- */
+  --avatar-xs:              24px;
+  --avatar-sm:              32px;
+  --avatar-md:              40px;
+  --avatar-lg:              56px;
+  --avatar-xl:              80px;
+  --avatar-2xl:             120px;
+
+/* ---------- 46. CODE COLORS ---------- */
+  --code-bg:                rgba(255, 255, 255, 0.02);
+  --code-border:            var(--border-subtle);
+  --code-text:              #D4D4D8;
+  --code-comment:           #6A6A76;
+  --code-keyword:           var(--accent-400);
+  --code-string:            #7DD3A0;
+  --code-number:            #F5B86A;
+  --code-function:          var(--accent2-300);
+  --code-type:              #E5DBFF;
+  --code-operator:          #A1A1AC;
+
+/* ---------- 47. CHART ---------- */
+  --chart-1:                var(--accent-400);
+  --chart-2:                var(--accent2-400);
+  --chart-3:                var(--accent3-400);
+  --chart-4:                var(--success-400);
+  --chart-5:                var(--warning-400);
+  --chart-grid:             rgba(255, 255, 255, 0.06);
+  --chart-axis:             rgba(255, 255, 255, 0.15);
+
+/* ---------- 48. TAGS ---------- */
+  --tag-bg:                 var(--surface-2);
+  --tag-bg-hover:           var(--surface-3);
+  --tag-border:             var(--border-subtle);
+  --tag-border-hover:       var(--border-default);
+  --tag-text:               var(--text-secondary);
+  --tag-text-hover:         var(--text-primary);
+  --tag-radius:             var(--radius-pill);
+  --tag-padding-x:          10px;
+  --tag-padding-y:          4px;
+  --tag-font-size:          var(--fs-label);
+  --tag-letter-spacing:     var(--ls-wide);
+
+/* ---------- 49. NAVIGATION ---------- */
+  --nav-height:             72px;
+  --nav-height-compact:     60px;
+  --nav-padding-x:          clamp(1rem, 4vw, 2.5rem);
+  --nav-bg:                 transparent;
+  --nav-bg-scrolled:        rgba(7, 7, 11, 0.75);
+  --nav-bg-scrolled-blur:   20px;
+  --nav-border-scrolled:    var(--border-subtle);
+
+/* ---------- 50. SECTION HEADER ---------- */
+  --eyebrow-color:          var(--accent-400);
+  --eyebrow-size:           var(--fs-label);
+  --eyebrow-letter-spacing: var(--ls-ultra);
+  --eyebrow-weight:         var(--fw-medium);
+
+/* ---------- 51. CARDS ---------- */
+  --card-bg:                var(--surface-1);
+  --card-bg-hover:          var(--surface-2);
+  --card-border:            var(--border-subtle);
+  --card-border-hover:      var(--border-default);
+  --card-radius:            var(--radius-lg);
+  --card-padding:           var(--space-6);
+  --card-shadow:            var(--shadow-sm);
+  --card-shadow-hover:      var(--shadow-lg);
+  --card-transition:        background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+
+/* ---------- 52. BUTTON — PRIMARY ---------- */
+  --btn-primary-bg:         var(--accent-500);
+  --btn-primary-bg-hover:   var(--accent-400);
+  --btn-primary-bg-active:  var(--accent-600);
+  --btn-primary-text:       #FFFFFF;
+  --btn-primary-border:     transparent;
+  --btn-primary-shadow:     var(--glow-accent-xs);
+  --btn-primary-shadow-hover: var(--glow-accent-sm);
+
+/* ---------- 53. BUTTON — SECONDARY ---------- */
+  --btn-secondary-bg:       var(--surface-2);
+  --btn-secondary-bg-hover: var(--surface-3);
+  --btn-secondary-text:     var(--text-primary);
+  --btn-secondary-border:   var(--border-default);
+  --btn-secondary-border-hover: var(--border-strong);
+
+/* ---------- 54. BUTTON — GHOST ---------- */
+  --btn-ghost-bg:           transparent;
+  --btn-ghost-bg-hover:     var(--surface-2);
+  --btn-ghost-text:         var(--text-secondary);
+  --btn-ghost-text-hover:   var(--text-primary);
+  --btn-ghost-border:       transparent;
+
+/* ---------- 55. BUTTON — GEOMETRY ---------- */
+  --btn-font-family:        var(--font-body);
+  --btn-font-weight:        var(--fw-medium);
+  --btn-font-size:          var(--fs-button);
+  --btn-font-size-sm:       var(--fs-button-sm);
+  --btn-font-size-lg:       var(--fs-button-lg);
+  --btn-letter-spacing:     var(--ls-snug);
+  --btn-padding-x:          20px;
+  --btn-padding-y:          12px;
+  --btn-padding-x-sm:       14px;
+  --btn-padding-y-sm:       8px;
+  --btn-padding-x-lg:       28px;
+  --btn-padding-y-lg:       16px;
+  --btn-radius:             var(--radius-pill);
+  --btn-radius-square:      var(--radius-md);
+  --btn-gap:                10px;
+  --btn-transition:         background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+
+/* ---------- 56. INPUTS ---------- */
+  --input-bg:               var(--surface-1);
+  --input-bg-hover:         var(--surface-2);
+  --input-bg-focus:         var(--surface-2);
+  --input-border:           var(--border-subtle);
+  --input-border-hover:     var(--border-default);
+  --input-border-focus:     var(--border-accent-strong);
+  --input-border-error:     var(--border-error);
+  --input-text:             var(--text-primary);
+  --input-placeholder:      var(--text-muted);
+  --input-radius:           var(--radius-md);
+  --input-padding-x:        16px;
+  --input-padding-y:        12px;
+  --input-font-size:        var(--fs-body);
+  --input-shadow-focus:     var(--glow-accent-xs);
+
+/* ---------- 57. TOOLTIP ---------- */
+  --tooltip-bg:             rgba(20, 20, 28, 0.95);
+  --tooltip-border:         var(--border-subtle);
+  --tooltip-text:           var(--text-primary);
+  --tooltip-radius:         var(--radius-sm);
+  --tooltip-padding-x:      10px;
+  --tooltip-padding-y:      6px;
+  --tooltip-font-size:      var(--fs-label);
+  --tooltip-shadow:         var(--shadow-md);
+
+/* ---------- 58. MODAL ---------- */
+  --modal-bg:               var(--bg-elevated);
+  --modal-border:           var(--border-subtle);
+  --modal-radius:           var(--radius-xl);
+  --modal-shadow:           var(--shadow-2xl);
+  --modal-max-width:        560px;
+
+/* ---------- 59. TOAST ---------- */
+  --toast-bg:               var(--glass-strong-bg);
+  --toast-border:           var(--glass-strong-border);
+  --toast-radius:           var(--radius-md);
+  --toast-shadow:           var(--shadow-lg);
+  --toast-padding-x:        16px;
+  --toast-padding-y:        12px;
+
+/* ---------- 60. PROJECT / CASE-STUDY ---------- */
+  --project-visual-bg:      var(--bg-elevated);
+  --project-visual-border:  var(--border-subtle);
+  --project-visual-radius:  var(--radius-xl);
+  --project-visual-shadow:  var(--shadow-lg);
+  --project-visual-hover:   var(--shadow-xl);
+  --project-chapter-gap:    clamp(4rem, 8vw, 8rem);
+  --project-chapter-radius: var(--radius-lg);
+
+/* ---------- 61. TIMELINE ---------- */
+  --timeline-spine-width:   2px;
+  --timeline-spine-color:   var(--border-default);
+  --timeline-spine-active:  var(--accent-500);
+  --timeline-dot-size:      12px;
+  --timeline-dot-bg:        var(--bg-canvas);
+  --timeline-dot-border:    2px solid var(--border-default);
+  --timeline-dot-border-active: 2px solid var(--accent-500);
+  --timeline-dot-glow:      var(--glow-accent-xs);
+  --timeline-node-gap:      clamp(2rem, 4vw, 4rem);
+
+/* ---------- 62. METRIC / COUNTER ---------- */
+  --metric-value-size:      clamp(2.25rem, 4vw + 1rem, 4rem);
+  --metric-value-weight:    var(--fw-semibold);
+  --metric-value-color:     var(--text-primary);
+  --metric-label-size:      var(--fs-label);
+  --metric-label-color:     var(--text-muted);
+  --metric-label-tracking:  var(--ls-wider);
+
+/* ---------- 63. FOOTER ---------- */
+  --footer-bg:              var(--bg-deep);
+  --footer-border:          var(--border-subtle);
+  --footer-text:            var(--text-muted);
+  --footer-text-hover:      var(--text-primary);
+  --footer-padding-y:       clamp(3rem, 6vw, 5rem);
+
+/* ---------- 64. BACKGROUND ---------- */
+  --bg-grid-size:           64px;
+  --bg-grid-color:          rgba(255, 255, 255, 0.025);
+  --bg-grid-color-strong:   rgba(255, 255, 255, 0.05);
+  --bg-orb-1-color:         rgba(139, 92, 246, 0.20);
+  --bg-orb-2-color:         rgba(34, 211, 238, 0.12);
+  --bg-orb-3-color:         rgba(244, 114, 182, 0.08);
+  --bg-orb-blur:            160px;
+  --bg-orb-size:            520px;
+
+/* ---------- 65. SPOTLIGHT ---------- */
+  --spotlight-size:         400px;
+  --spotlight-color:        rgba(139, 92, 246, 0.10);
+  --spotlight-fade:         radial-gradient(circle, var(--spotlight-color) 0%, transparent 70%);
+
+/* ---------- 66. MAGNETIC ---------- */
+  --magnet-strength-sm:     4px;
+  --magnet-strength-md:     8px;
+  --magnet-strength-lg:     12px;
+  --magnet-ease:            var(--ease-out);
+  --magnet-duration:        400ms;
+
+/* ---------- 67. HOVER HELPERS ---------- */
+  --hover-lift-sm:          translateY(-2px);
+  --hover-lift-md:          translateY(-4px);
+  --hover-lift-lg:          translateY(-8px);
+  --hover-scale-sm:         scale(1.02);
+  --hover-scale-md:         scale(1.04);
+  --hover-glow-accent:      var(--glow-accent-sm);
+
+} /* end PART 1 :root */
+
+
+/* ============================================================
+   PART 2 — SEMANTIC ALIASES
+   ============================================================ */
+:root {
+  --surface-page:           var(--bg-canvas);
+  --surface-card:           var(--card-bg);
+  --surface-card-hover:     var(--card-bg-hover);
+  --surface-overlay:        var(--overlay-bg);
+
+  --text-heading:           var(--text-primary);
+  --text-body:              var(--text-secondary);
+  --text-label:             var(--text-muted);
+  --text-link:              var(--accent-400);
+  --text-link-hover:        var(--accent-300);
+
+  --interactive-default:    var(--text-secondary);
+  --interactive-hover:      var(--text-primary);
+  --interactive-accent:     var(--accent-400);
+  --interactive-disabled:   var(--text-faint);
+
+  --divider:                var(--border-subtle);
+  --divider-strong:         var(--border-default);
+
+  --motion-reveal:          var(--dur-slow) var(--ease-out);
+  --motion-hover:           var(--dur-base) var(--ease-out);
+  --motion-press:           var(--dur-xs) var(--ease-out);
+  --motion-transition:      var(--dur-medium) var(--ease-out);
+}
+
+
+/* ============================================================
+   PART 3 — COMPONENT TOKENS
+   ============================================================ */
+:root {
+  --button-primary:         var(--btn-primary-bg);
+  --button-primary-hover:   var(--btn-primary-bg-hover);
+  --button-secondary:       var(--btn-secondary-bg);
+  --button-secondary-hover: var(--btn-secondary-bg-hover);
+  --button-ghost:           var(--btn-ghost-bg);
+  --button-ghost-hover:     var(--btn-ghost-bg-hover);
+
+  --chip-bg:                var(--surface-2);
+  --chip-bg-hover:          var(--surface-3);
+  --chip-border:            var(--border-subtle);
+  --chip-text:              var(--text-secondary);
+  --chip-text-hover:        var(--text-primary);
+  --chip-radius:            var(--radius-pill);
+
+  --badge-success-bg:       rgba(52, 211, 153, 0.10);
+  --badge-success-text:     var(--success-400);
+  --badge-success-border:   var(--border-success);
+  --badge-warning-bg:       rgba(251, 191, 36, 0.10);
+  --badge-warning-text:     var(--warning-400);
+  --badge-warning-border:   var(--border-warning);
+  --badge-error-bg:         rgba(248, 113, 113, 0.10);
+  --badge-error-text:       var(--error-400);
+  --badge-error-border:     var(--border-error);
+  --badge-accent-bg:        rgba(139, 92, 246, 0.10);
+  --badge-accent-text:      var(--accent-400);
+  --badge-accent-border:    var(--border-accent);
+
+  --status-dot-success:     var(--success-400);
+  --status-dot-warning:     var(--warning-400);
+  --status-dot-error:       var(--error-400);
+  --status-dot-glow-success: 0 0 8px rgba(52, 211, 153, 0.60);
+  --status-dot-glow-warning: 0 0 8px rgba(251, 191, 36, 0.60);
+  --status-dot-glow-error:   0 0 8px rgba(248, 113, 113, 0.60);
+
+  --skill-tile-bg:          var(--surface-2);
+  --skill-tile-bg-hover:    var(--surface-3);
+  --skill-tile-border:      var(--border-subtle);
+  --skill-tile-border-hover: var(--border-accent);
+  --skill-tile-text:        var(--text-primary);
+  --skill-tile-radius:      var(--radius-md);
+  --skill-tile-glow-hover:  var(--glow-accent-xs);
+
+  --nav-link-color:         var(--text-secondary);
+  --nav-link-color-hover:   var(--text-primary);
+  --nav-link-color-active:  var(--text-primary);
+  --nav-link-underline:     var(--accent-400);
+
+  --section-eyebrow-color:  var(--accent-400);
+  --section-title-color:    var(--text-primary);
+  --section-subtitle-color: var(--text-secondary);
+
+  --counter-value-color:    var(--text-primary);
+  --counter-suffix-color:   var(--accent-400);
+}
+
+
+/* ============================================================
+   PART 4 — RESPONSIVE TOKEN OVERRIDES
+   ------------------------------------------------------------
+   Section rhythm values here are aligned with the corrected
+   per-side value in PART 1 so the gap between sections stays
+   consistent across every breakpoint.
+   ============================================================ */
+
+@media (max-width: 1920px) {
+  :root {
+    --container-default:    1440px;
+  }
+}
+
+@media (max-width: 1536px) {
+  :root {
+    --container-default:    1280px;
+    --bg-grid-size:         56px;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --container-default:    1120px;
+    --space-section-y:      clamp(1.75rem, 3.2vw, 2.75rem);
+    --space-section-gap:    clamp(1.25rem, 3vw, 2.25rem);
+    --bg-grid-size:         52px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --container-default:    100%;
+    --space-section-y:      clamp(1.5rem, 3vw, 2.25rem);
+    --space-section-gap:    clamp(1.25rem, 2.5vw, 2rem);
+    --glass-blur:           14px;
+    --glass-strong-blur:    20px;
+    --bg-grid-size:         48px;
+    --bg-orb-size:          420px;
+    --bg-orb-blur:          120px;
+    --nav-height:           64px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-section-y:      clamp(1.5rem, 3.2vw, 2rem);
+    --space-section-gap:    clamp(1rem, 2.8vw, 1.75rem);
+    --glass-blur:           12px;
+    --glass-strong-blur:    18px;
+    --glass-light-blur:     8px;
+    --radius-xl:            16px;
+    --radius-2xl:           22px;
+    --radius-3xl:           28px;
+    --shadow-lg:            0 12px 32px rgba(0, 0, 0, 0.40);
+    --shadow-xl:            0 20px 52px rgba(0, 0, 0, 0.50);
+    --bg-grid-size:         40px;
+    --bg-orb-size:          340px;
+    --bg-orb-blur:          100px;
+    --nav-height:           60px;
+    --card-padding:         20px;
+    --cursor-size-ring:     28px;
+    --cursor-size-ring-hover: 46px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-section-y:      clamp(1.5rem, 3.5vw, 1.75rem);
+    --space-section-gap:    clamp(1rem, 3vw, 1.5rem);
+    --space-inline:         clamp(1rem, 3vw, 1.5rem);
+    --fs-hero:              clamp(2.5rem, 10vw, 3.5rem);
+    --fs-mega:              clamp(2rem, 9vw, 3rem);
+    --fs-display:           clamp(2rem, 8vw, 2.75rem);
+    --card-padding:         18px;
+    --btn-padding-x:        16px;
+    --btn-padding-y:        10px;
+    --bg-grid-size:         32px;
+    --bg-orb-size:          260px;
+    --bg-orb-blur:          80px;
+    --container-default:    100%;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --space-section-y:      clamp(1.5rem, 4vw, 1.75rem);
+    --space-section-gap:    clamp(1rem, 3.5vw, 1.25rem);
+    --radius-xl:            14px;
+    --radius-2xl:           18px;
+    --radius-3xl:           22px;
+    --card-padding:         16px;
+    --btn-padding-x:        14px;
+    --btn-padding-y:        10px;
+    --nav-height:           56px;
+    --nav-padding-x:        1rem;
+    --scrollbar-width:      6px;
+    --bg-grid-size:         28px;
+    --bg-orb-size:          220px;
+    --bg-orb-blur:          70px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --fs-hero:              clamp(2.25rem, 10vw, 2.75rem);
+    --card-padding:         14px;
+    --space-section-y:      1.5rem;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  :root {
+    --border-faint:         rgba(255, 255, 255, 0.05);
+    --border-subtle:        rgba(255, 255, 255, 0.08);
+    --border-default:       rgba(255, 255, 255, 0.11);
+  }
+}
+
+@media (color-gamut: p3) {
+  :root {
+    --accent-500:           color(display-p3 0.545 0.361 0.965);
+    --accent-400:           color(display-p3 0.627 0.482 1.000);
+    --accent2-400:          color(display-p3 0.133 0.827 0.933);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+
+/* ============================================================
+   PART 5 — ACCESSIBILITY LAYERS
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant:          0.01ms;
+    --dur-2xs:              0.01ms;
+    --dur-xs:               0.01ms;
+    --dur-sm:               0.01ms;
+    --dur-fast:             0.01ms;
+    --dur-base:             0.01ms;
+    --dur-md:               0.01ms;
+    --dur-medium:           0.01ms;
+    --dur-slow:             0.01ms;
+    --dur-slower:           0.01ms;
+    --dur-slowest:          0.01ms;
+    --dur-ambient:          0.01ms;
+    --dur-ambient-slow:     0.01ms;
+    --dur-ambient-ultra:    0.01ms;
+    --ease-linear:          linear;
+    --ease-out:             linear;
+    --ease-out-soft:        linear;
+    --ease-out-quart:       linear;
+    --ease-out-expo:        linear;
+    --ease-in:              linear;
+    --ease-in-out:          linear;
+    --ease-standard:        linear;
+    --ease-emphasized:      linear;
+    --ease-spring:          linear;
+    --ease-spring-soft:     linear;
+    --transition-fast:      none;
+    --transition-base:      none;
+    --transition-medium:    none;
+    --transition-slow:      none;
+    --transition-spring:    none;
+    --transition-all-smooth: none;
+    --motion-dist-xs:       0;
+    --motion-dist-sm:       0;
+    --motion-dist-md:       0;
+    --motion-dist-lg:       0;
+    --motion-dist-xl:       0;
+    --motion-dist-2xl:      0;
+    --motion-dist-3xl:      0;
+    --scale-press:          1;
+    --scale-hover-sm:       1;
+    --scale-hover-md:       1;
+    --scale-hover-lg:       1;
+    --scale-pop:            1;
+    --hover-lift-sm:        none;
+    --hover-lift-md:        none;
+    --hover-lift-lg:        none;
+    --hover-scale-sm:       none;
+    --hover-scale-md:       none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-bg:             #0E0E15;
+    --glass-bg-hover:       #14141C;
+    --glass-bg-active:      #18181F;
+    --glass-light-bg:       #0E0E15;
+    --glass-strong-bg:      #0E0E15;
+    --glass-blur:           0px;
+    --glass-light-blur:     0px;
+    --glass-strong-blur:    0px;
+    --glass-saturate:       100%;
+    --overlay-blur:         0px;
+    --nav-bg-scrolled:      #0B0B11;
+    --nav-bg-scrolled-blur: 0px;
+    --shadow-lg:            0 12px 32px rgba(0, 0, 0, 0.55);
+    --shadow-xl:            0 20px 52px rgba(0, 0, 0, 0.65);
+    --shadow-2xl:           0 32px 80px rgba(0, 0, 0, 0.70);
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
+  :root {
+    --bg-orb-blur:          0px;
+    --noise-opacity:        0;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-primary:         #FFFFFF;
+    --text-secondary:       #D4D4D8;
+    --text-tertiary:        #A1A1AC;
+    --text-muted:           #8A8A96;
+    --border-faint:         rgba(255, 255, 255, 0.10);
+    --border-subtle:        rgba(255, 255, 255, 0.18);
+    --border-default:       rgba(255, 255, 255, 0.28);
+    --border-strong:        rgba(255, 255, 255, 0.40);
+    --focus-ring-width:     3px;
+    --glow-accent-xs:       0 0 0 1px var(--accent-400);
+    --glow-accent-sm:       0 0 0 1px var(--accent-400);
+  }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --border-faint:         CanvasText;
+    --border-subtle:        CanvasText;
+    --border-default:       CanvasText;
+    --border-strong:        CanvasText;
+    --text-primary:         CanvasText;
+    --text-secondary:       CanvasText;
+    --text-tertiary:        GrayText;
+    --text-muted:           GrayText;
+    --focus-ring-color:     Highlight;
+    --focus-ring:           0 0 0 var(--focus-ring-offset) Canvas, 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) Highlight;
+    --btn-primary-bg:       Highlight;
+    --btn-primary-text:     HighlightText;
+    --btn-secondary-bg:     ButtonFace;
+    --btn-secondary-text:   ButtonText;
+    --btn-secondary-border: ButtonText;
+  }
+}
+
+@media print {
+  :root {
+    --text-primary:         #000000;
+    --text-secondary:       #333333;
+    --bg-canvas:            #FFFFFF;
+    --border-subtle:        #CCCCCC;
+    --shadow-xs:            none;
+    --shadow-sm:            none;
+    --shadow-md:            none;
+    --shadow-lg:            none;
+  }
+}
+
+
+/* ============================================================
+   PART 6 — EDITORIAL SYSTEM
+   ------------------------------------------------------------
+   --section-rhythm is the per-side padding applied to every
+   section wrapper (About, Skills, App.css .section). Two
+   adjacent sections each contribute one value, so the total
+   visual gap between sections is 2 × --section-rhythm.
+
+   Corrected value: clamp(2rem, 3.5vw, 3.125rem) = 32–50px
+   per side → 64–100px total gap across all viewports.
+   ============================================================ */
+
+:root {
+  --bg-canvas:              #06060A;
+  --bg-canvas-alt:          #0A0A0F;
+  --bg-elevated:            #0E0E13;
+  --bg-deep:                #050508;
+
+  --radius-md:              4px;
+  --radius-lg:              4px;
+  --radius-xl:              6px;
+  --radius-2xl:             8px;
+
+  --ink:                    #F2F2F4;
+  --ink-soft:               #A8A8B0;
+  --ink-muted:              #6E6E78;
+  --ink-faint:              #3A3A42;
+  --ink-ghost:              #22222A;
+
+  --void:                   #06060A;
+  --void-2:                 #0A0A0F;
+  --void-3:                 #0F0F15;
+
+  --accent-signature:       #8B5CF6;
+  --accent-signature-soft:  #A07BFF;
+  --accent-signature-dim:   rgba(139, 92, 246, 0.55);
+  --accent-signature-faint: rgba(139, 92, 246, 0.18);
+
+  --rule:                   rgba(255, 255, 255, 0.08);
+  --rule-strong:            rgba(255, 255, 255, 0.14);
+  --rule-soft:              rgba(255, 255, 255, 0.045);
+  --rule-accent:            rgba(139, 92, 246, 0.45);
+  --rule-w:                 1px;
+
+  --grid-cols:              12;
+  --grid-gap:               clamp(16px, 1.5vw, 24px);
+  --grid-gutter:            clamp(20px, 3vw, 48px);
+  --content-max:            1440px;
+  --content-wide:           1600px;
+  --content-narrow:         620px;
+  --content-prose:          720px;
+
+  --rhythm-2xs:             0.5rem;
+  --rhythm-xs:              1rem;
+  --rhythm-sm:              1.5rem;
+  --rhythm-md:              2.5rem;
+  --rhythm-lg:              4rem;
+  --rhythm-xl:              6rem;
+  --rhythm-2xl:             9rem;
+  --rhythm-3xl:             13rem;
+
+  /* CORRECTED section rhythm — per-side value */
+  --section-rhythm:         clamp(2rem, 3.5vw, 3.125rem);
+  --section-rhythm-tight:   clamp(1.5rem, 2.5vw, 2.25rem);
+
+  --fs-hero-display:        clamp(3.25rem, 9vw, 9rem);
+  --fs-hero-line:           clamp(3.25rem, 12vw, 11rem);
+  --fs-display-2xl:         clamp(3.5rem, 9vw, 7rem);
+  --fs-display-xl:          clamp(2.75rem, 6vw, 5rem);
+  --fs-display-lg:          clamp(2.25rem, 4vw, 3.5rem);
+  --fs-display-md:          clamp(1.75rem, 3vw, 2.5rem);
+  --fs-display-sm:          clamp(1.25rem, 2vw, 1.75rem);
+
+  --fs-meta:                0.6875rem;
+  --fs-meta-lg:             0.75rem;
+  --fs-meta-xl:             0.875rem;
+
+  --lh-hero:                0.92;
+  --lh-display:             1.02;
+  --lh-tight:               1.10;
+
+  --ls-hero:                -0.035em;
+  --ls-display:             -0.025em;
+  --ls-meta:                0.16em;
+  --ls-meta-wide:           0.22em;
+
+  --surface-editorial:      rgba(255, 255, 255, 0.02);
+  --surface-editorial-2:    rgba(255, 255, 255, 0.04);
+  --surface-editorial-3:    rgba(255, 255, 255, 0.06);
+
+  --ease-editorial:         cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro:              140ms;
+  --dur-reveal:             600ms;
+  --dur-ambient:            6000ms;
+
+  --focus-editorial:
+    0 0 0 1px var(--void),
+    0 0 0 3px var(--accent-signature);
+}
+
+
+/* ============================================================
+   PART 7 — HERO SIZE CORRECTION
+   ------------------------------------------------------------
+   Kept for reference. The hero display size is also set in
+   PART 6; this block is a no-op unless PART 6 is removed.
+   ============================================================ */
+:root {
+  --fs-hero-display: clamp(3.25rem, 9vw, 9rem);
+}
+/* ============================================================
+   PART 8 — TIGHTER SECTION RHYTHM + DEPTH TOKENS
+   ------------------------------------------------------------
+   Two changes bundled here:
+
+     1. Section rhythm further tightened so inter-section gaps
+        read as 48–80px total across all viewports.
+
+     2. Depth vocabulary — perspective, tilt, lift, shadow —
+        so we have a consistent language for 3D treatment.
+        Tokens are named, not magic numbers scattered through
+        component CSS.
+   ============================================================ */
+
+:root {
+  /* --- 8.01 Section rhythm (per-side) --- */
+  --section-rhythm:         clamp(1.5rem, 2.5vw, 2.5rem);      /* 24–40px */
+  --section-rhythm-tight:   clamp(1rem, 2vw, 2rem);
+
+  /* Legacy spacing tokens aligned */
+  --space-section-y:        clamp(1.5rem, 2.5vw, 2.5rem);
+  --space-section-y-tight:  clamp(1rem, 2vw, 2rem);
+  --space-section-gap:      clamp(1rem, 2vw, 1.75rem);
+
+  /* --- 8.02 Depth vocabulary --- */
+  --perspective-near:       600px;
+  --perspective-mid:        1000px;
+  --perspective-far:        1600px;
+
+  --tilt-subtle:            2deg;
+  --tilt-medium:            4deg;
+  --tilt-strong:            6deg;
+
+  --lift-subtle:            -2px;
+  --lift-medium:            -4px;
+  --lift-strong:            -6px;
+
+  --depth-shadow-sm:        0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --depth-shadow-md:        0 16px 40px -16px rgba(0, 0, 0, 0.7);
+  --depth-shadow-lg:        0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  --depth-shadow-accent:    0 16px 40px -16px rgba(139, 92, 246, 0.35);
+
+  --depth-timing:           380ms;
+  --depth-ease:             cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- 8.03 Flow / connector tokens (used by Projects) --- */
+  --flow-line:              rgba(255, 255, 255, 0.14);
+  --flow-line-strong:       rgba(255, 255, 255, 0.22);
+  --flow-node-bg:           var(--void, #06060A);
+  --flow-node-border:       var(--rule-strong);
+  --flow-node-accent:       var(--accent-signature);
+  --flow-dot-size:          6px;
+  --flow-dash-length:       6;
+  --flow-dash-gap:          4;
+  --flow-dash-speed:        3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --depth-timing:         0.01ms;
+  }
+}
+
+/* ============================================================
+   END — theme.css
+   ============================================================ */

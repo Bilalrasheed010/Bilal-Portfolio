@@ -1,0 +1,114 @@
+/* ============================================================
+   ScrollSpine
+   File: src/components/ScrollSpine.css
+   ------------------------------------------------------------
+   Fixed vertical hairline on the left edge, with a travelling
+   dot that tracks scroll progress and small section ticks.
+
+   The line uses a mask so it fades toward both ends — it
+   doesn't butt up against the navbar or footer.
+   ============================================================ */
+
+.scroll-spine {
+  position: fixed;
+  top: 108px;
+  bottom: 108px;
+  left: 20px;
+  width: 12px;
+  z-index: var(--z-sticky, 100);
+  pointer-events: none;
+  --progress: 0;
+  opacity: 0;
+  animation: scrollSpineIn 900ms cubic-bezier(0.16, 1, 0.3, 1) 800ms
+    both;
+}
+
+/* ------------------------------------------------------------
+   The vertical line
+   ------------------------------------------------------------ */
+.scroll-spine__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 8%,
+    rgba(255, 255, 255, 0.08) 92%,
+    transparent 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   Section ticks — small marks at each section's midpoint
+   ------------------------------------------------------------ */
+.scroll-spine__tick {
+  position: absolute;
+  left: 50%;
+  width: 5px;
+  height: 1px;
+  margin-left: -2.5px;
+  background: rgba(255, 255, 255, 0.16);
+  transition:
+    background-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left center;
+}
+
+.scroll-spine__tick.is-active {
+  background: var(--accent-signature, #8B5CF6);
+  transform: scaleX(1.8);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.7);
+}
+
+/* ------------------------------------------------------------
+   Travelling dot
+   ------------------------------------------------------------ */
+.scroll-spine__dot {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--progress) * 100%);
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--accent-signature, #8B5CF6);
+  box-shadow:
+    0 0 10px rgba(139, 92, 246, 0.75),
+    0 0 22px rgba(139, 92, 246, 0.35);
+  transition: top 120ms linear;
+  will-change: top;
+}
+
+/* ------------------------------------------------------------
+   Entrance
+   ------------------------------------------------------------ */
+@keyframes scrollSpineIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ------------------------------------------------------------
+   Responsive — hide on smaller viewports where there is not
+   enough space between the viewport edge and the container.
+   ------------------------------------------------------------ */
+@media (max-width: 1279px) {
+  .scroll-spine {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   Reduced motion — component already returns null, but this
+   is a defense in case it renders from a stale bundle.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-spine {
+    display: none;
+  }
+}

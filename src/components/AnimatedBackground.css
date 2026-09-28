@@ -1,0 +1,146 @@
+/* ============================================================
+   AnimatedBackground
+   File: src/components/AnimatedBackground.css
+   ------------------------------------------------------------
+   Layers (back to front):
+     base     → faint top-halo gradient
+     grid     → fine hairline grid, radial fade
+     pool     → cursor-reactive light, very faint
+     noise    → subtle grain
+     vignette → soft edge darkening
+   ============================================================ */
+
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-base);
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg-canvas);
+  --mx: 50vw;
+  --my: 50vh;
+}
+
+/* ------------------------------------------------------------
+   01. Base — barely-there halo at the top of the viewport
+   ------------------------------------------------------------ */
+.animated-bg__base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 90% 45% at 50% -8%,
+      rgba(139, 92, 246, 0.055) 0%,
+      transparent 60%
+    );
+}
+
+/* ------------------------------------------------------------
+   02. Grid — fine, low-contrast hairlines
+   ------------------------------------------------------------ */
+.animated-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(
+    ellipse 95% 80% at 50% 40%,
+    #000 15%,
+    transparent 88%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 95% 80% at 50% 40%,
+    #000 15%,
+    transparent 88%
+  );
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------
+   03. Pool — cursor-reactive ambient light
+   Small. Quiet. Follows the pointer with a long ease.
+   ------------------------------------------------------------ */
+.animated-bg__pool {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  margin-left: -260px;
+  margin-top: -260px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.075) 0%,
+    rgba(139, 92, 246, 0.03) 40%,
+    transparent 72%
+  );
+  filter: blur(28px);
+  transform: translate3d(var(--mx), var(--my), 0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   04. Noise — subtle grain
+   ------------------------------------------------------------ */
+.animated-bg__noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* ------------------------------------------------------------
+   05. Vignette — softer edge darkening than before
+   ------------------------------------------------------------ */
+.animated-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 125% 95% at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.28) 92%,
+    rgba(0, 0, 0, 0.48) 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   06. Responsive
+   ------------------------------------------------------------ */
+@media (max-width: 860px) {
+  .animated-bg__grid {
+    background-size: 72px 72px;
+  }
+  .animated-bg__pool {
+    width: 400px;
+    height: 400px;
+    margin-left: -200px;
+    margin-top: -200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-bg__grid {
+    background-size: 56px 56px;
+  }
+}
+
+/* ------------------------------------------------------------
+   07. Reduced motion — freeze the pool in place
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg__pool {
+    transition: none;
+    transform: none;
+    top: 30%;
+    left: 50%;
+    margin-left: -260px;
+    margin-top: -260px;
+    opacity: 0.6;
+  }
+}

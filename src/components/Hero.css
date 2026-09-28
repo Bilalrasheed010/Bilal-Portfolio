@@ -1,0 +1,488 @@
+/* ============================================================
+   Hero
+   File: src/components/Hero.css
+   ------------------------------------------------------------
+   Editorial composition. Typography-led.
+
+   Motion:
+     • Entrance + scroll — driven by GSAP in Hero.jsx.
+     • Ambient — CSS keyframes run continuously on nested spans
+       GSAP does not touch, so nothing conflicts.
+     • Base state is fully visible so that if JS fails, the hero
+       still renders complete.
+   ============================================================ */
+
+/* ============================================================
+   01. SECTION SHELL
+   ============================================================ */
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: calc(var(--nav-height, 72px) + 24px);
+  padding-bottom: 40px;
+  display: flex;
+  overflow: hidden;
+  z-index: var(--z-raised, 1);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--content-max, 1440px);
+  margin-inline: auto;
+  padding-inline: var(--grid-gutter, clamp(20px, 3vw, 48px));
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+/* ============================================================
+   02. META ROW
+   ============================================================ */
+.hero__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.hero__meta-sep {
+  color: var(--ink-faint, var(--text-faint));
+}
+
+.hero__meta-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__meta-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-signature);
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.55);
+  animation: heroDotPulse 2400ms ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   03. MAIN GRID
+   ============================================================ */
+.hero__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  column-gap: var(--grid-gap, 24px);
+  row-gap: clamp(40px, 6vw, 80px);
+  align-content: space-between;
+}
+
+/* ------------------------------------------------------------
+   Vertical guide — hairline in column 8
+   ------------------------------------------------------------ */
+.hero__guide {
+  grid-column: 8 / 9;
+  grid-row: 1 / -1;
+  position: relative;
+  pointer-events: none;
+  align-self: stretch;
+}
+
+.hero__guide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--rule) 15%,
+    var(--rule) 85%,
+    transparent 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   Name
+   ------------------------------------------------------------ */
+.hero__name {
+  grid-column: 1 / 8;
+  grid-row: 1;
+  align-self: start;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-display);
+  font-size: var(--fs-hero-display, clamp(3.25rem, 10vw, 9rem));
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.hero__name-line {
+  display: block;
+}
+
+/* ------------------------------------------------------------
+   Name breathing — very slow scale on an inner span GSAP
+   does not touch. Runs continuously, even during scroll.
+   ------------------------------------------------------------ */
+.hero__name-breath {
+  display: inline-block;
+  transform-origin: left center;
+  animation: heroNameBreath 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero__period {
+  display: inline-block;
+  width: 0.15em;
+  height: 0.15em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: var(--accent-signature);
+  vertical-align: -0.02em;
+  animation: heroPeriodGlow 4s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------
+   Brief — role + statement
+   ------------------------------------------------------------ */
+.hero__brief {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.hero__role {
+  margin: 0;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta-lg, 0.75rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.hero__statement {
+  margin: 0;
+  color: var(--ink-soft, var(--text-secondary));
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  max-width: 40ch;
+}
+
+/* ------------------------------------------------------------
+   Actions
+   ------------------------------------------------------------ */
+.hero__actions {
+  grid-column: 1 / 7;
+  grid-row: 2;
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.hero__action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 4px;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta-lg, 0.75rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 140ms
+    var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.hero__action::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 500ms
+    var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.hero__action:hover::before,
+.hero__action:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.hero__action:hover,
+.hero__action:focus-visible {
+  color: var(--ink, var(--text-primary));
+}
+
+.hero__action:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+  border-radius: 2px;
+}
+
+.hero__action--primary {
+  padding: 12px 20px;
+  border: 1px solid var(--rule-accent);
+  border-radius: 4px;
+  color: var(--accent-signature);
+  transition:
+    color 140ms var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 140ms var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1)),
+    background-color 140ms
+      var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.hero__action--primary::before {
+  display: none;
+}
+
+.hero__action--primary:hover,
+.hero__action--primary:focus-visible {
+  color: var(--accent-signature-soft);
+  border-color: var(--accent-signature-dim);
+  background: var(--accent-signature-faint);
+}
+
+.hero__action-arrow {
+  display: inline-block;
+  transition: transform 240ms
+    var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.hero__action:hover .hero__action-arrow,
+.hero__action:focus-visible .hero__action-arrow {
+  transform: translateX(6px);
+}
+
+/* ------------------------------------------------------------
+   Scroll cue
+   ------------------------------------------------------------ */
+.hero__scroll {
+  grid-column: 10 / 13;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.hero__scroll-line {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--rule-strong);
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-signature);
+  transform: translateX(-100%);
+  animation: heroScrollLine 2600ms
+    cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* ============================================================
+   04. AMBIENT KEYFRAMES
+   ------------------------------------------------------------
+   These run continuously, independent of the GSAP timelines.
+   They are scoped to elements GSAP never touches:
+     • heroNameBreath — the inner span, never animated by GSAP
+     • heroPeriodGlow — box-shadow only; GSAP controls opacity+scale
+     • heroDotPulse / heroScrollLine — unchanged
+   ============================================================ */
+@keyframes heroNameBreath {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.006); }
+}
+
+@keyframes heroPeriodGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.55),
+      0 0 44px rgba(139, 92, 246, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(139, 92, 246, 0.80),
+      0 0 64px rgba(139, 92, 246, 0.38);
+  }
+}
+
+@keyframes heroDotPulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%      { opacity: 0.5; transform: scale(1.25); }
+}
+
+@keyframes heroScrollLine {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================================
+   05. RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-height, 60px) + 20px);
+    padding-bottom: 32px;
+  }
+
+  .hero__grid {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-content: start;
+  }
+
+  .hero__guide { display: none; }
+
+  .hero__name {
+    align-self: auto;
+    font-size: clamp(2.75rem, 10vw, 6.5rem);
+    line-height: 0.94;
+  }
+
+  .hero__brief {
+    align-self: auto;
+    padding-bottom: 20px;
+  }
+
+  .hero__actions,
+  .hero__scroll {
+    align-self: auto;
+  }
+
+  .hero__scroll {
+    justify-self: auto;
+    align-self: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__name {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+    letter-spacing: -0.035em;
+  }
+
+  .hero__statement {
+    font-size: 0.9375rem;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 14px;
+  }
+
+  .hero__meta-sep { display: none; }
+
+  .hero__actions {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero__action--primary {
+    padding: 11px 18px;
+  }
+
+  .hero__scroll { display: none; }
+
+  .hero__name {
+    font-size: clamp(2.5rem, 14vw, 4.5rem);
+    line-height: 0.96;
+  }
+}
+
+/* ============================================================
+   06. REDUCED MOTION
+   ------------------------------------------------------------
+   GSAP already handles this in Hero.jsx. These rules are a
+   fallback in case JS is disabled entirely.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero__meta,
+  .hero__name-line,
+  .hero__role,
+  .hero__statement,
+  .hero__action,
+  .hero__scroll,
+  .hero__guide,
+  .hero__period {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__name-breath,
+  .hero__period,
+  .hero__meta-dot,
+  .hero__scroll-line::after {
+    animation: none;
+  }
+
+  .hero__period {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.55),
+      0 0 44px rgba(139, 92, 246, 0.22);
+  }
+}

@@ -1,0 +1,453 @@
+/* ============================================================
+   Experience
+   File: src/sections/Experience.css
+   ------------------------------------------------------------
+   Editorial timeline. Rules, not boxes.
+
+   Motion contract:
+     • Base state is fully visible.
+     • Reveal runs only when `.is-in-view` is set by JS.
+     • If JS or the observer fails, content stays visible.
+   ============================================================ */
+
+.experience {
+  position: relative;
+  /* Top padding is intentionally tighter than the bottom so the
+     transition from the Skills section feels connected. */
+  padding-top: clamp(1.75rem, 2.25vw, 2.5rem);
+  padding-bottom: var(--section-rhythm);
+  z-index: var(--z-raised, 1);
+}
+
+/* ------------------------------------------------------------
+   01. Meta row
+   ------------------------------------------------------------ */
+.experience__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 clamp(24px, 3vw, 36px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.experience__meta-count {
+  color: var(--ink-faint, var(--text-faint));
+}
+
+/* ------------------------------------------------------------
+   02. Intro
+   ------------------------------------------------------------ */
+.experience__intro {
+  margin: 0 0 clamp(32px, 4vw, 48px);
+  max-width: 62ch;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.9vw + 0.75rem, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------
+   03. Timeline entries
+   ------------------------------------------------------------ */
+.experience__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.experience__entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+  column-gap: clamp(24px, 4vw, 64px);
+  padding-block: clamp(32px, 4vw, 56px);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.experience__entry:last-child {
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.experience__index {
+  position: absolute;
+  top: clamp(20px, 2.5vw, 32px);
+  right: 0;
+  color: var(--ink-faint, var(--text-faint));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------
+   04. Left column — period
+   ------------------------------------------------------------ */
+.experience__period {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.experience__period-year {
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.experience__period-range {
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.experience__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--accent-signature);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.experience__status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-signature);
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.55);
+  animation: experiencePulse 2400ms ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------
+   05. Right column — role, company, content
+   ------------------------------------------------------------ */
+.experience__body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.4vw, 32px);
+  min-width: 0;
+}
+
+.experience__head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.experience__role {
+  margin: 0;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.experience__company {
+  margin: 0;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta-lg, 0.75rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.experience__company-sep {
+  color: var(--ink-faint, var(--text-faint));
+}
+
+.experience__location {
+  color: var(--ink-muted, var(--text-muted));
+}
+
+.experience__summary {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--ink-soft, var(--text-secondary));
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+/* ------------------------------------------------------------
+   06. Achievements
+   ------------------------------------------------------------ */
+.experience__achievements {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 68ch;
+}
+
+.experience__achievement {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.14em);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.experience__achievement-mark {
+  display: inline-block;
+  width: 6px;
+  height: 1px;
+  margin-top: 8px;
+  background: var(--ink-faint, var(--text-faint));
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------
+   07. Pipeline strip
+   ------------------------------------------------------------ */
+.experience__pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.experience__pipeline-label {
+  color: var(--ink-faint, var(--text-faint));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.experience__pipeline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.experience__pipeline-stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.experience__pipeline-name {
+  white-space: nowrap;
+}
+
+.experience__pipeline-arrow {
+  color: var(--ink-faint, var(--text-faint));
+}
+
+/* ============================================================
+   08. Reveal choreography
+   ============================================================ */
+.experience.is-in-view .experience__meta {
+  animation: experienceFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+.experience.is-in-view .experience__intro {
+  animation: experienceFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+}
+
+.experience.is-in-view .experience__entry {
+  animation: experienceFadeUp 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.experience.is-in-view .experience__entry:nth-child(1) { animation-delay: 280ms; }
+.experience.is-in-view .experience__entry:nth-child(2) { animation-delay: 400ms; }
+.experience.is-in-view .experience__entry:nth-child(3) { animation-delay: 520ms; }
+.experience.is-in-view .experience__entry:nth-child(4) { animation-delay: 640ms; }
+
+.experience.is-in-view .experience__entry {
+  position: relative;
+}
+
+.experience.is-in-view .experience__entry::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-strong);
+  transform-origin: left center;
+  animation: experienceLineDraw 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.experience.is-in-view .experience__entry:nth-child(1)::before { animation-delay: 320ms; }
+.experience.is-in-view .experience__entry:nth-child(2)::before { animation-delay: 440ms; }
+.experience.is-in-view .experience__entry:nth-child(3)::before { animation-delay: 560ms; }
+.experience.is-in-view .experience__entry:nth-child(4)::before { animation-delay: 680ms; }
+
+@keyframes experienceFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes experienceLineDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes experiencePulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%      { opacity: 0.5; transform: scale(1.25); }
+}
+
+/* ============================================================
+   09. Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .experience__entry {
+    grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
+    column-gap: clamp(20px, 3vw, 40px);
+    padding-block: clamp(28px, 3.5vw, 44px);
+  }
+
+  .experience__period-year {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .experience__role {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .experience__entry {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+    padding-block: 32px;
+  }
+
+  .experience__index {
+    top: 24px;
+  }
+
+  .experience__period {
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .experience__status {
+    margin-top: 0;
+  }
+
+  .experience__achievements {
+    max-width: 100%;
+  }
+
+  .experience__summary {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+  }
+
+  .experience__intro {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .experience__entry {
+    padding-block: 28px;
+  }
+
+  .experience__period-year {
+    font-size: 1.5rem;
+  }
+
+  .experience__role {
+    font-size: 1.25rem;
+  }
+
+  .experience__achievement {
+    gap: 10px;
+    letter-spacing: 0.10em;
+    line-height: 1.55;
+  }
+
+  .experience__pipeline-list {
+    gap: 8px;
+  }
+
+  .experience__pipeline-stage {
+    gap: 8px;
+  }
+}
+
+/* ============================================================
+   10. Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .experience.is-in-view .experience__meta,
+  .experience.is-in-view .experience__intro,
+  .experience.is-in-view .experience__entry,
+  .experience.is-in-view .experience__entry::before {
+    animation: none;
+  }
+
+  .experience__status-dot {
+    animation: none;
+  }
+}

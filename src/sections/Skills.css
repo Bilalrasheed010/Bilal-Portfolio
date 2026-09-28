@@ -1,0 +1,384 @@
+/* ============================================================
+   Skills
+   File: src/sections/Skills.css
+   ------------------------------------------------------------
+   Editorial technical index. Rules, not boxes.
+
+   Motion contract:
+     • Base state is fully visible.
+     • Reveal runs only when `.is-in-view` is set by JS.
+     • If JS or the observer fails, content stays visible.
+   ============================================================ */
+
+.skills {
+  position: relative;
+  padding-top: var(--section-rhythm);
+  /* Bottom padding is intentionally tighter than the top so the
+     transition into the Experience section feels connected
+     rather than separated by empty space. */
+  padding-bottom: clamp(1.75rem, 2.25vw, 2.5rem);
+  z-index: var(--z-raised, 1);
+}
+
+/* ------------------------------------------------------------
+   01. Meta row
+   ------------------------------------------------------------ */
+.skills__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 clamp(24px, 3vw, 36px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.skills__meta-index {
+  color: var(--ink-faint, var(--text-faint));
+}
+
+/* ------------------------------------------------------------
+   02. Intro
+   ------------------------------------------------------------ */
+.skills__intro {
+  margin: 0 0 clamp(32px, 4vw, 48px);
+  max-width: 62ch;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.9vw + 0.75rem, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------
+   03. Category list
+   ------------------------------------------------------------ */
+.skills__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 2.8vw, 36px);
+}
+
+.skills__category {
+  margin: 0;
+}
+
+.skills__category-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 10px;
+}
+
+.skills__category-number {
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills__category-label {
+  margin: 0;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-mono);
+  font-size: clamp(0.8125rem, 0.85vw, 0.9375rem);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  text-align: right;
+  transition: color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------
+   Rule — draws from left on reveal, tints on active category
+   ------------------------------------------------------------ */
+.skills__category-rule {
+  position: relative;
+  height: 1px;
+  background: var(--rule-strong);
+  margin-bottom: clamp(12px, 1.2vw, 18px);
+  transform-origin: left center;
+}
+
+/* ------------------------------------------------------------
+   04. Technologies
+   ------------------------------------------------------------ */
+.skills__techs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: clamp(16px, 1.8vw, 28px);
+  row-gap: 10px;
+}
+
+.skills__tech-item {
+  margin: 0;
+}
+
+.skills__tech {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1.4;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Underline drawn on hover / focus / active */
+.skills__tech::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.skills__tech:hover,
+.skills__tech.is-active {
+  color: var(--accent-signature);
+}
+
+.skills__tech:hover::after,
+.skills__tech.is-active::after {
+  transform: scaleX(1);
+}
+
+.skills__tech:focus-visible {
+  outline: none;
+  color: var(--accent-signature);
+  box-shadow: var(--focus-editorial);
+  border-radius: 2px;
+}
+
+.skills__tech:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------------
+   05. Active-category tint
+   ------------------------------------------------------------ */
+.skills__category.is-active .skills__category-number {
+  color: var(--accent-signature);
+}
+
+.skills__category.is-active .skills__category-label {
+  color: var(--accent-signature-soft);
+}
+
+.skills__category.is-active .skills__category-rule {
+  background: linear-gradient(
+    90deg,
+    var(--accent-signature) 0%,
+    var(--rule-strong) 42%,
+    var(--rule-strong) 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   06. Context strip
+   ------------------------------------------------------------ */
+.skills__context {
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-strong);
+  min-height: 1.6em;
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.skills__context-line { display: inline; }
+.skills__context-tech { color: var(--accent-signature); }
+.skills__context-sep { color: var(--ink-faint, var(--text-faint)); }
+.skills__context-label { color: var(--ink-muted, var(--text-muted)); }
+.skills__context-projects { color: var(--ink, var(--text-primary)); }
+.skills__context-empty { color: var(--ink-faint, var(--text-faint)); }
+.skills__context-hint { color: var(--ink-faint, var(--text-faint)); }
+
+/* ============================================================
+   07. Reveal choreography
+   ============================================================ */
+.skills.is-in-view .skills__meta {
+  animation: skillsFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+.skills.is-in-view .skills__intro {
+  animation: skillsFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+}
+
+.skills.is-in-view .skills__category {
+  animation: skillsFadeUp 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.skills.is-in-view .skills__category:nth-child(1) { animation-delay: 280ms; }
+.skills.is-in-view .skills__category:nth-child(2) { animation-delay: 380ms; }
+.skills.is-in-view .skills__category:nth-child(3) { animation-delay: 480ms; }
+.skills.is-in-view .skills__category:nth-child(4) { animation-delay: 580ms; }
+.skills.is-in-view .skills__category:nth-child(5) { animation-delay: 680ms; }
+.skills.is-in-view .skills__category:nth-child(6) { animation-delay: 780ms; }
+
+.skills.is-in-view .skills__category-rule {
+  animation: skillsLineDraw 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.skills.is-in-view .skills__category:nth-child(1) .skills__category-rule { animation-delay: 340ms; }
+.skills.is-in-view .skills__category:nth-child(2) .skills__category-rule { animation-delay: 440ms; }
+.skills.is-in-view .skills__category:nth-child(3) .skills__category-rule { animation-delay: 540ms; }
+.skills.is-in-view .skills__category:nth-child(4) .skills__category-rule { animation-delay: 640ms; }
+.skills.is-in-view .skills__category:nth-child(5) .skills__category-rule { animation-delay: 740ms; }
+.skills.is-in-view .skills__category:nth-child(6) .skills__category-rule { animation-delay: 840ms; }
+
+.skills.is-in-view .skills__context {
+  animation: skillsFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms both;
+}
+
+@keyframes skillsFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skillsLineDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ============================================================
+   08. Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .skills__list {
+    gap: clamp(24px, 3.5vw, 32px);
+  }
+
+  .skills__intro {
+    margin-bottom: 36px;
+  }
+
+  .skills__category-head {
+    margin-bottom: 9px;
+  }
+
+  .skills__category-rule {
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills__list {
+    gap: 26px;
+  }
+
+  .skills__techs {
+    row-gap: 9px;
+  }
+
+  .skills__context {
+    margin-top: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+  }
+
+  .skills__intro {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .skills__list {
+    gap: 24px;
+  }
+
+  .skills__category-head {
+    margin-bottom: 8px;
+  }
+
+  .skills__category-label {
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+  }
+
+  .skills__category-rule {
+    margin-bottom: 12px;
+  }
+
+  .skills__techs {
+    column-gap: 14px;
+    row-gap: 8px;
+  }
+
+  .skills__context {
+    margin-top: 32px;
+    padding-top: 14px;
+  }
+}
+
+/* ============================================================
+   09. Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .skills.is-in-view .skills__meta,
+  .skills.is-in-view .skills__intro,
+  .skills.is-in-view .skills__category,
+  .skills.is-in-view .skills__category-rule,
+  .skills.is-in-view .skills__context {
+    animation: none;
+  }
+
+  .skills__tech,
+  .skills__tech::after,
+  .skills__category-number,
+  .skills__category-label {
+    transition: none;
+  }
+
+  .skills__tech:hover::after,
+  .skills__tech.is-active::after,
+  .skills__tech:focus-visible::after {
+    transform: scaleX(0);
+  }
+}

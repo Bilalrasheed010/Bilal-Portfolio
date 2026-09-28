@@ -1,0 +1,451 @@
+/* ============================================================
+   Navbar
+   File: src/components/Navbar.css
+   ------------------------------------------------------------
+   Editorial navigation. Rules, not boxes.
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-signature) 28%,
+    var(--accent2-400) 50%,
+    var(--accent-signature) 72%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--dur-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.navbar.is-scrolled {
+  background: rgba(6, 6, 10, 0.72);
+  border-bottom-color: var(--rule);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.navbar.is-scrolled::before {
+  opacity: 0.45;
+}
+
+.navbar.is-open {
+  background: var(--void);
+  border-bottom-color: transparent;
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------
+   Brand
+   ------------------------------------------------------------ */
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink, var(--text-primary));
+  text-decoration: none;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar__brand-name {
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__brand:hover .navbar__brand-name,
+.navbar__brand:focus-visible .navbar__brand-name {
+  color: var(--ink, var(--text-primary));
+}
+
+.navbar__brand:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------
+   Desktop links + active rule + chapter subtitle
+   ------------------------------------------------------------ */
+.navbar__links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 36px);
+}
+
+.navbar__link {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-block: 8px;
+  transition: color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__link:hover,
+.navbar__link:focus-visible {
+  color: var(--ink, var(--text-primary));
+}
+
+.navbar__link.is-active {
+  color: var(--ink, var(--text-primary));
+}
+
+.navbar__link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+  border-radius: 2px;
+}
+
+.navbar__link-label {
+  display: block;
+  line-height: 1;
+}
+
+/* Chapter subtitle — absolute so it does not affect layout */
+.navbar__link-chapter {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  color: var(--ink-faint, var(--text-faint));
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -3px);
+  pointer-events: none;
+  transition:
+    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__link.is-active .navbar__link-chapter {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.navbar__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--accent-signature);
+  transition:
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    width 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease;
+  will-change: transform, width;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   Right cluster
+   ------------------------------------------------------------ */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.navbar__resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    color 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__resume:hover,
+.navbar__resume:focus-visible {
+  color: var(--ink, var(--text-primary));
+  border-color: var(--rule-strong);
+  background: var(--surface-editorial, rgba(255, 255, 255, 0.02));
+}
+
+.navbar__resume:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+}
+
+.navbar__resume-arrow {
+  display: inline-block;
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__resume:hover .navbar__resume-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ------------------------------------------------------------
+   Mobile toggle
+   ------------------------------------------------------------ */
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink, var(--text-primary));
+  cursor: pointer;
+  transition:
+    background-color 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar__toggle:hover {
+  background: var(--surface-editorial-2, rgba(255, 255, 255, 0.04));
+  border-color: var(--rule-strong);
+}
+
+.navbar__toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+}
+
+.navbar__toggle-icon {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 10px;
+}
+
+.navbar__toggle-icon span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    top 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__toggle-icon span:nth-child(1) { top: 0; }
+.navbar__toggle-icon span:nth-child(2) { bottom: 0; }
+
+.navbar__toggle[aria-expanded="true"] .navbar__toggle-icon span:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.navbar__toggle[aria-expanded="true"] .navbar__toggle-icon span:nth-child(2) {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+/* ------------------------------------------------------------
+   Mobile drawer
+   ------------------------------------------------------------ */
+.navbar__drawer {
+  position: fixed;
+  inset: var(--nav-height) 0 0 0;
+  z-index: var(--z-drawer);
+  background: var(--void);
+  overflow-y: auto;
+  animation: navbarDrawerIn 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes navbarDrawerIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.navbar__drawer-inner {
+  display: flex;
+  flex-direction: column;
+  padding-block: 32px 48px;
+}
+
+.navbar__drawer-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr 24px;
+  align-items: baseline;
+  gap: 16px;
+  padding-block: 22px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink, var(--text-primary));
+  text-decoration: none;
+  transition:
+    padding-left 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__drawer-link:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.navbar__drawer-index {
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+}
+
+.navbar__drawer-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.navbar__drawer-arrow {
+  align-self: center;
+  color: var(--ink-muted, var(--text-muted));
+  font-size: 0.875rem;
+  transition:
+    color 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__drawer-link:hover,
+.navbar__drawer-link:focus-visible {
+  padding-left: 8px;
+  color: var(--accent-signature);
+}
+
+.navbar__drawer-link:hover .navbar__drawer-arrow,
+.navbar__drawer-link:focus-visible .navbar__drawer-arrow {
+  color: var(--accent-signature);
+  transform: translate(2px, -2px);
+}
+
+.navbar__drawer-link.is-active .navbar__drawer-index {
+  color: var(--accent-signature);
+}
+
+.navbar__drawer-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+  border-radius: 2px;
+}
+
+.navbar__drawer-resume {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  padding: 14px 22px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    color 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__drawer-resume:hover,
+.navbar__drawer-resume:focus-visible {
+  color: var(--accent-signature);
+  border-color: var(--rule-accent);
+  background: var(--accent-signature-faint);
+}
+
+.navbar__drawer-resume:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+}
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
+@media (max-width: 560px) {
+  .navbar__brand-name {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar::before,
+  .navbar__link,
+  .navbar__link-chapter,
+  .navbar__indicator,
+  .navbar__resume,
+  .navbar__resume-arrow,
+  .navbar__toggle,
+  .navbar__toggle-icon span,
+  .navbar__drawer,
+  .navbar__drawer-link,
+  .navbar__drawer-arrow,
+  .navbar__drawer-resume {
+    transition: none;
+    animation: none;
+  }
+}

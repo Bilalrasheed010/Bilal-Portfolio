@@ -1,0 +1,353 @@
+/* ============================================================
+   About
+   File: src/sections/About.css
+   ------------------------------------------------------------
+   Editorial spread. Rules, not boxes.
+
+   Motion contract:
+     • Base state is fully visible.
+     • Entrance animations run only when `.is-in-view` is set
+       on the section by the component.
+     • If JS or the observer fails, content stays visible.
+   ============================================================ */
+
+.about {
+  position: relative;
+  padding-top: clamp(3.5rem, 5vw, 5rem);
+  padding-bottom: var(--section-rhythm, clamp(6rem, 12vw, 12rem));
+  z-index: var(--z-raised, 1);
+}
+
+/* ------------------------------------------------------------
+   01. Meta row
+   ------------------------------------------------------------ */
+.about__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 clamp(48px, 7vw, 96px);
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.about__meta-loc {
+  color: var(--ink-faint, var(--text-faint));
+}
+
+/* ------------------------------------------------------------
+   02. Pull quote + narrative
+   ------------------------------------------------------------ */
+.about__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gap, 24px);
+  row-gap: clamp(40px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(56px, 8vw, 112px);
+}
+
+.about__quote {
+  grid-column: 1 / 9;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.about__quote-line {
+  display: block;
+}
+
+.about__quote-period {
+  display: inline-block;
+  width: 0.11em;
+  height: 0.11em;
+  margin-left: 0.05em;
+  border-radius: 50%;
+  background: var(--accent-signature);
+  vertical-align: -0.02em;
+}
+
+.about__narrative {
+  grid-column: 10 / 13;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--ink-soft, var(--text-secondary));
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.about__narrative p {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   03. Strengths
+   ------------------------------------------------------------ */
+.about__strengths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grid-gap, 24px);
+  row-gap: clamp(32px, 4vw, 48px);
+}
+
+.about__strength {
+  position: relative;
+  padding-top: 20px;
+}
+
+/* Hairline drawn via pseudo so it can animate. */
+.about__strength::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-strong);
+  transform-origin: left center;
+}
+
+.about__strength-index {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about__strength-title {
+  margin: 0 0 12px;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  transition:
+    padding-left 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about__strength-detail {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------
+   04. Hover micro-interactions
+   ------------------------------------------------------------ */
+.about__strength:hover .about__strength-index {
+  color: var(--accent-signature);
+}
+
+.about__strength:hover .about__strength-title {
+  padding-left: 4px;
+  color: var(--accent-signature-soft);
+}
+
+/* ============================================================
+   05. Reveal choreography — triggered by .is-in-view
+   ============================================================ */
+
+/* Meta row */
+.about.is-in-view .about__meta {
+  animation: aboutRevealUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+/* Quote lines — staggered */
+.about.is-in-view .about__quote-line {
+  animation: aboutRevealUp 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.about.is-in-view .about__quote-line:nth-child(1) { animation-delay: 180ms; }
+.about.is-in-view .about__quote-line:nth-child(2) { animation-delay: 300ms; }
+.about.is-in-view .about__quote-line:nth-child(3) { animation-delay: 420ms; }
+
+/* Period mark */
+.about.is-in-view .about__quote-period {
+  animation: aboutPeriodIn 450ms cubic-bezier(0.16, 1, 0.3, 1) 700ms both;
+}
+
+/* Narrative paragraphs */
+.about.is-in-view .about__narrative p {
+  animation: aboutRevealUp 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.about.is-in-view .about__narrative p:nth-child(1) { animation-delay: 560ms; }
+.about.is-in-view .about__narrative p:nth-child(2) { animation-delay: 660ms; }
+
+/* Strength hairlines — draw left to right */
+.about.is-in-view .about__strength::before {
+  animation: aboutLineDraw 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.about.is-in-view .about__strength:nth-child(1)::before { animation-delay: 220ms; }
+.about.is-in-view .about__strength:nth-child(2)::before { animation-delay: 320ms; }
+.about.is-in-view .about__strength:nth-child(3)::before { animation-delay: 420ms; }
+
+/* Strength content — index, title, detail in cascade */
+.about.is-in-view .about__strength-index,
+.about.is-in-view .about__strength-title,
+.about.is-in-view .about__strength-detail {
+  animation: aboutRevealUp 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.about.is-in-view .about__strength:nth-child(1) .about__strength-index { animation-delay: 340ms; }
+.about.is-in-view .about__strength:nth-child(1) .about__strength-title { animation-delay: 400ms; }
+.about.is-in-view .about__strength:nth-child(1) .about__strength-detail { animation-delay: 460ms; }
+
+.about.is-in-view .about__strength:nth-child(2) .about__strength-index { animation-delay: 440ms; }
+.about.is-in-view .about__strength:nth-child(2) .about__strength-title { animation-delay: 500ms; }
+.about.is-in-view .about__strength:nth-child(2) .about__strength-detail { animation-delay: 560ms; }
+
+.about.is-in-view .about__strength:nth-child(3) .about__strength-index { animation-delay: 540ms; }
+.about.is-in-view .about__strength:nth-child(3) .about__strength-title { animation-delay: 600ms; }
+.about.is-in-view .about__strength:nth-child(3) .about__strength-detail { animation-delay: 660ms; }
+
+/* ============================================================
+   06. Keyframes
+   ============================================================ */
+@keyframes aboutRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aboutPeriodIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes aboutLineDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ============================================================
+   07. Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+    align-items: start;
+  }
+
+  .about__quote,
+  .about__narrative {
+    grid-column: 1 / 2;
+  }
+
+  .about__quote {
+    font-size: clamp(1.75rem, 6.5vw, 3.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .about__strengths {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .about__meta {
+    margin-bottom: 48px;
+  }
+
+  .about__grid {
+    margin-bottom: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding-top: 3rem;
+    padding-bottom: clamp(4rem, 10vw, 6rem);
+  }
+
+  .about__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 40px;
+    padding-bottom: 14px;
+  }
+
+  .about__quote {
+    font-size: clamp(1.5rem, 8vw, 2.25rem);
+  }
+
+  .about__quote-period {
+    width: 0.12em;
+    height: 0.12em;
+  }
+}
+
+/* ============================================================
+   08. Reduced motion — everything visible, nothing animated
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .about.is-in-view .about__meta,
+  .about.is-in-view .about__quote-line,
+  .about.is-in-view .about__quote-period,
+  .about.is-in-view .about__narrative p,
+  .about.is-in-view .about__strength::before,
+  .about.is-in-view .about__strength-index,
+  .about.is-in-view .about__strength-title,
+  .about.is-in-view .about__strength-detail {
+    animation: none;
+  }
+
+  .about__strength-index,
+  .about__strength-title {
+    transition: none;
+  }
+
+  .about__strength:hover .about__strength-title {
+    padding-left: 0;
+    color: var(--ink, var(--text-primary));
+  }
+
+  .about__strength:hover .about__strength-index {
+    color: var(--ink-muted, var(--text-muted));
+  }
+}

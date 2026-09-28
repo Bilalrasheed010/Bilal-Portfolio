@@ -1,0 +1,29 @@
+/* ============================================================
+   ReadingProgress
+   File: src/components/ReadingProgress.css
+   ============================================================ */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: calc(var(--z-navbar, 200) + 1);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--accent-signature, #8B5CF6) 0%,
+    var(--accent2-400, #22D3EE) 100%
+  );
+  transform-origin: left center;
+  transform: scaleX(var(--p, 0));
+  opacity: 0.85;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress {
+    display: none;
+  }
+}

@@ -1,0 +1,100 @@
+/* ============================================================
+   Microinteractions
+   File: src/styles/microinteractions.css
+   ------------------------------------------------------------
+   Small section-specific hover refinements. Purely additive —
+   never overrides existing hover states.
+
+   Uses :has() for the Skills dim-others pattern. In older
+   browsers without :has() support, the rule is simply ignored
+   and the section behaves exactly as before.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   About — strength index lifts on hover
+   ------------------------------------------------------------ */
+.about__strength-index {
+  transition:
+    color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.about__strength:hover .about__strength-index {
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------
+   Skills — hovering one category gently dims the others
+   ------------------------------------------------------------ */
+.skills__category {
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills__list:has(.skills__category:hover)
+  .skills__category:not(:hover) {
+  opacity: 0.52;
+}
+
+/* ------------------------------------------------------------
+   Experience — hovering an achievement line indents it
+   ------------------------------------------------------------ */
+.experience__achievement {
+  transition:
+    padding-left 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience__achievement:hover {
+  padding-left: 6px;
+  color: var(--ink, var(--text-primary));
+}
+
+.experience__achievement:hover .experience__achievement-mark {
+  background: var(--accent-signature, #8B5CF6);
+}
+
+.experience__achievement-mark {
+  transition: background-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------
+   Education — cert items shift right on hover
+   ------------------------------------------------------------ */
+.education__cert-item {
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.education__cert-item:hover {
+  transform: translateX(4px);
+}
+
+/* ------------------------------------------------------------
+   Reduced motion — remove every transform
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .about__strength-index,
+  .skills__category,
+  .experience__achievement,
+  .experience__achievement-mark,
+  .education__cert-item {
+    transition: none;
+  }
+
+  .about__strength:hover .about__strength-index,
+  .education__cert-item:hover {
+    transform: none;
+  }
+
+  .experience__achievement:hover {
+    padding-left: 0;
+  }
+
+  .skills__list:has(.skills__category:hover)
+    .skills__category:not(:hover) {
+    opacity: 1;
+  }
+}

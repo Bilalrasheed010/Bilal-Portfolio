@@ -1,0 +1,62 @@
+/* ============================================================
+   TopologyCanvas
+   File: src/components/three/TopologyCanvas.css
+   ------------------------------------------------------------
+   Floating tooltip that appears when a node in the Hero
+   topology is hovered.
+   ============================================================ */
+
+.topology-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  pointer-events: none;
+  padding: 8px 12px;
+  background: rgba(6, 6, 10, 0.92);
+  border: 1px solid var(--rule-strong, rgba(255, 255, 255, 0.14));
+  border-radius: 4px;
+  color: var(--ink, #F2F2F4);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  will-change: transform;
+}
+
+.topology-tooltip.is-visible {
+  opacity: 1;
+}
+
+.topology-tooltip__name {
+  color: var(--accent-signature, #8B5CF6);
+}
+
+.topology-tooltip__sep {
+  color: var(--ink-faint, #3A3A42);
+}
+
+.topology-tooltip__projects {
+  color: var(--ink, #F2F2F4);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.topology-tooltip__empty {
+  color: var(--ink-faint, #3A3A42);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topology-tooltip {
+    display: none;
+  }
+}

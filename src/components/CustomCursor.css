@@ -1,0 +1,121 @@
+/* ============================================================
+   CustomCursor
+   File: src/components/CustomCursor.css
+   ------------------------------------------------------------
+   Desktop-only cursor. The wrapper is fixed and covers the
+   viewport with pointer-events: none — the two children are
+   positioned via JS in viewport coordinates.
+   ============================================================ */
+
+.cursor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor, 9000);
+  opacity: 0;
+  transition: opacity 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor.is-active {
+  opacity: 1;
+}
+
+.cursor__dot,
+.cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+/* ------------------------------------------------------------
+   Dot — small solid point, follows exactly
+   ------------------------------------------------------------ */
+.cursor__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  transition:
+    width 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor__dot--link {
+  width: 4px;
+  height: 4px;
+  opacity: 0.75;
+}
+
+.cursor__dot--text {
+  width: 1px;
+  height: 14px;
+  border-radius: 0;
+  opacity: 0.9;
+}
+
+.cursor__dot--project {
+  opacity: 0;
+}
+
+.cursor__dot--hidden {
+  opacity: 0;
+}
+
+/* ------------------------------------------------------------
+   Ring — soft trailing ring
+   ------------------------------------------------------------ */
+.cursor__ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  transition:
+    width 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor__ring--link {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(160, 123, 255, 0.85);
+}
+
+.cursor__ring--text {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.cursor__ring--project {
+  width: 76px;
+  height: 76px;
+  border-color: rgba(160, 123, 255, 0.9);
+}
+
+.cursor__ring--hidden {
+  opacity: 0;
+}
+
+/* ------------------------------------------------------------
+   Pressing — the ring contracts slightly
+   ------------------------------------------------------------ */
+.is-pressing .cursor__ring {
+  width: 26px;
+  height: 26px;
+}
+
+.is-pressing .cursor__ring--link {
+  width: 42px;
+  height: 42px;
+}
+
+.is-pressing .cursor__ring--project {
+  width: 66px;
+  height: 66px;
+}

@@ -1,0 +1,470 @@
+/* ============================================================
+   Contact
+   File: src/sections/Contact.css
+   ------------------------------------------------------------
+   Closing scene. Editorial composition echoing the Hero.
+
+   Channels are icon tiles — square, bordered, with a mono
+   label beneath. Accent tile (email) carries a slightly
+   stronger border on idle.
+
+   Motion contract:
+     • Base state is fully visible.
+     • Reveal runs only when `.is-in-view` is set by JS.
+     • If JS or the observer fails, content stays visible.
+   ============================================================ */
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: var(--section-rhythm);
+  z-index: var(--z-raised, 1);
+}
+
+.contact > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   01. Meta row
+   ------------------------------------------------------------ */
+.contact__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 clamp(32px, 4vw, 56px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.contact__meta-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact__meta-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-signature);
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.55);
+  animation: contactPulse 2400ms ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------
+   02. Lead — title + intro
+   ------------------------------------------------------------ */
+.contact__lead {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(32px, 5vw, 72px);
+  row-gap: 32px;
+  align-items: end;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.contact__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 8vw, 7rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.contact__title-line {
+  display: block;
+}
+
+.contact__period {
+  display: inline-block;
+  width: 0.14em;
+  height: 0.14em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: var(--accent-signature);
+  vertical-align: -0.02em;
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.55),
+    0 0 44px rgba(139, 92, 246, 0.22);
+}
+
+.contact__intro {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--ink-soft, var(--text-secondary));
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.9vw + 0.75rem, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------
+   03. Channels block
+   ------------------------------------------------------------ */
+.contact__channels {
+  position: relative;
+  padding-top: clamp(24px, 3vw, 40px);
+}
+
+.contact__channels::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-strong);
+  transform-origin: left center;
+}
+
+.contact__channels-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact__channels-label {
+  color: var(--ink, var(--text-primary));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.18em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.contact__channels-count {
+  color: var(--ink-faint, var(--text-faint));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------
+   04. Icon row
+   ------------------------------------------------------------ */
+.contact__channels-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  max-width: 480px;
+}
+
+.contact__channel {
+  min-width: 0;
+}
+
+.contact__channel-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-block: 8px;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact__channel-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-editorial);
+  border-radius: 6px;
+}
+
+/* ---- The tile ---- */
+.contact__channel-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.012);
+  color: var(--ink-soft, var(--text-secondary));
+  transition:
+    border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Email tile carries a slightly stronger idle border */
+.contact__channel--accent .contact__channel-tile {
+  border-color: var(--rule-accent, rgba(139, 92, 246, 0.45));
+  color: var(--accent-signature);
+  background: var(--accent-signature-faint, rgba(139, 92, 246, 0.08));
+}
+
+/* ---- The label ---- */
+.contact__channel-label {
+  color: var(--ink-muted, var(--text-muted));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  transition: color 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Hover / focus ---- */
+.contact__channel-link:hover .contact__channel-tile,
+.contact__channel-link:focus-visible .contact__channel-tile {
+  border-color: var(--accent-signature);
+  background: rgba(139, 92, 246, 0.08);
+  color: var(--accent-signature);
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 28px -16px rgba(139, 92, 246, 0.55),
+    0 0 0 1px rgba(139, 92, 246, 0.08) inset;
+}
+
+.contact__channel-link:hover .contact__channel-label,
+.contact__channel-link:focus-visible .contact__channel-label {
+  color: var(--ink, var(--text-primary));
+}
+
+/* ------------------------------------------------------------
+   05. Footnote
+   ------------------------------------------------------------ */
+.contact__footnote {
+  margin: clamp(40px, 5vw, 64px) 0 0;
+  color: var(--ink-faint, var(--text-faint));
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta, 0.6875rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-meta, 0.16em);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ============================================================
+   06. Reveal choreography
+   ============================================================ */
+.contact.is-in-view .contact__meta {
+  animation: contactFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+.contact.is-in-view .contact__title-line {
+  animation: contactFadeUp 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.contact.is-in-view .contact__title-line:nth-child(1) {
+  animation-delay: 180ms;
+}
+.contact.is-in-view .contact__title-line:nth-child(2) {
+  animation-delay: 300ms;
+}
+.contact.is-in-view .contact__title-line:nth-child(3) {
+  animation-delay: 420ms;
+}
+
+.contact.is-in-view .contact__period {
+  animation: contactPeriodIn 480ms
+    cubic-bezier(0.16, 1, 0.3, 1) 700ms both;
+}
+
+.contact.is-in-view .contact__intro {
+  animation: contactFadeUp 650ms
+    cubic-bezier(0.16, 1, 0.3, 1) 560ms both;
+}
+
+.contact.is-in-view .contact__channels::before {
+  animation: contactLineDraw 800ms
+    cubic-bezier(0.16, 1, 0.3, 1) 640ms both;
+}
+
+.contact.is-in-view .contact__channels-head {
+  animation: contactFadeUp 620ms
+    cubic-bezier(0.16, 1, 0.3, 1) 700ms both;
+}
+
+.contact.is-in-view .contact__channel {
+  animation: contactFadeUp 580ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.contact.is-in-view .contact__channel:nth-child(1) {
+  animation-delay: 760ms;
+}
+.contact.is-in-view .contact__channel:nth-child(2) {
+  animation-delay: 830ms;
+}
+.contact.is-in-view .contact__channel:nth-child(3) {
+  animation-delay: 900ms;
+}
+.contact.is-in-view .contact__channel:nth-child(4) {
+  animation-delay: 970ms;
+}
+
+.contact.is-in-view .contact__footnote {
+  animation: contactFadeUp 650ms
+    cubic-bezier(0.16, 1, 0.3, 1) 1080ms both;
+}
+
+@keyframes contactFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contactPeriodIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contactLineDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes contactPulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%      { opacity: 0.5; transform: scale(1.25); }
+}
+
+/* ============================================================
+   07. Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .contact__lead {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    align-items: start;
+  }
+
+  .contact__title {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+  }
+
+  .contact__intro {
+    max-width: 60ch;
+  }
+
+  .contact__channels-list {
+    max-width: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .contact__title {
+    font-size: clamp(2.25rem, 11vw, 4rem);
+    line-height: 0.98;
+  }
+
+  .contact__channels-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+  }
+
+  .contact__title {
+    font-size: clamp(2rem, 12vw, 3.25rem);
+    letter-spacing: -0.035em;
+  }
+
+  .contact__period {
+    width: 0.15em;
+    height: 0.15em;
+  }
+
+  .contact__channels-head {
+    margin-bottom: 20px;
+  }
+
+  .contact__channel-tile {
+    width: 52px;
+    height: 52px;
+  }
+
+  .contact__footnote {
+    margin-top: 40px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* ============================================================
+   08. Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .contact.is-in-view .contact__meta,
+  .contact.is-in-view .contact__title-line,
+  .contact.is-in-view .contact__period,
+  .contact.is-in-view .contact__intro,
+  .contact.is-in-view .contact__channels::before,
+  .contact.is-in-view .contact__channels-head,
+  .contact.is-in-view .contact__channel,
+  .contact.is-in-view .contact__footnote {
+    animation: none;
+  }
+
+  .contact__meta-dot {
+    animation: none;
+  }
+
+  .contact__channel-tile,
+  .contact__channel-label {
+    transition: none;
+  }
+
+  .contact__channel-link:hover .contact__channel-tile,
+  .contact__channel-link:focus-visible .contact__channel-tile {
+    transform: none;
+  }
+}

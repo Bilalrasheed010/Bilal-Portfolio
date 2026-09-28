@@ -1,0 +1,39 @@
+/* ============================================================
+   HeroTopology
+   File: src/components/three/HeroTopology.css
+   ------------------------------------------------------------
+   Positioning only. Entrance animation is driven by GSAP in
+   Hero.jsx. Reduced motion keeps the wrapper visible.
+   ============================================================ */
+
+.hero-topology {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-topology canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-topology__fallback {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+}
+
+.hero-topology__fallback svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-topology {
+    opacity: 1;
+  }
+}
